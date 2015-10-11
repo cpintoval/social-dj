@@ -1,8 +1,8 @@
 var express = require('express');
 var router = express.Router();
-
 var bodyParser = require('body-parser');
 var parseUrlencoded = bodyParser.urlencoded({ extended: false });
+var path = require('path');
 
 var parties = {
   'party-1': ["Song 1", "Song 2", "Song 3"],
@@ -39,11 +39,9 @@ router.route('/:name')
     if (!songs) {
       response.status(404).json('No party found with name ' + request.partyName);
     }
-    else if (songs.length === 0) {
-      response.json("This party has no songs...yet.");
-    }
     else {
-      response.json(songs);
+      // response.json(songs);
+      response.sendFile(path.resolve('public/party-user.html'));
     }
   })
   .delete(function(request, response) {
