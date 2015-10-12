@@ -10,6 +10,7 @@ $(function() {
 
   socket.on('new song', function(song) {
     $('#songs').append($('<li>').text(song));
+    console.log(song);
   });
 
 });
