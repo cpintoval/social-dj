@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= name %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <h1><%= name %>'s Now Trending</h1>
+    <div>
+      <form>
+        <input type="text" id='song' name='song' placeholder='Enter a song...'>
+        <input type="submit">
+      </form>
+    </div>
+    <ul id='songs'>
+      <% for(var i = 0; i < songs.length; i++) { %>
+      <li><%= songs[i] %></li>
+      <% } %>
+    </ul>
+    <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+    <script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="/javascripts/party.js"></script>
+  </body>
+</html>
