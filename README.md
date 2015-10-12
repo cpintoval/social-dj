@@ -1,2 +1,0 @@
-Social DJ Web App
-=================
