@@ -5,12 +5,17 @@
     <link rel='stylesheet' href='/stylesheets/style.css' />
   </head>
   <body>
+
+    <p>Hello, <%= email %>. Welcome back! Your password is <%= password %></p><br/><br/> 
     <h1>Party List</h1>
     <ul id='parties'>
       <% for(var i = 0; i < parties.length; i++) { %>
       <li><a href=<%= '/parties/' + parties[i] %>><%= parties[i] %></a></li>
       <% } %>
     </ul>
+
+    <a href="/logout">Logout</a>
+    
     <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
     <script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
     <script src="/socket.io/socket.io.js"></script>

@@ -1,11 +1,46 @@
 <!DOCTYPE html>
 <html>
   <head>
+  THIS PAGE IS FOR LOGIN
     <title><%= title %></title>
     <link rel='stylesheet' href='/stylesheets/style.css' />
   </head>
   <body>
     <h1><%= title %></h1>
     <p>Welcome to <%= title %></p>
+
+
+    <input type="text" size="30" placeholder="Type your email here" id="email"><br/>
+    <input type="password" size="30" placeholder="Type your password here" id="password"><br/>
+    <input type="button" id="button" value="login"></input>
   </body>
+
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+  <script>
+
+  $(document).ready(function(){
+
+    var email, password;
+
+    $('#button').click(function(){
+
+      email = $('#email').val();
+      password = $('#password').val();
+
+      //NEED TO ADD AUTHENTICATION to check with database//
+      if (password === "moneyishandsome"){
+
+      $.post('http://localhost:3000/', {email: email, password: password}, function(response){
+        if (response === 'done'){
+          window.location.href="/parties";
+        }
+      })
+
+      } else {
+        alert('Password is incorrect');
+      }
+
+    })
+  })
+  </script>
 </html>
