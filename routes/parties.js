@@ -49,6 +49,24 @@ router.route('/:name')
     response.sendStatus(200);
   });
 
+router.route('/:name/songs')
+  // Running pre-conditions on dynamic routes
+  .all(function(request, response, next) {
+    var name = request.params.name;
+    var party = name.toLowerCase();
+    request.partyName = party;
+    next();
+  })
+  .get(function(request, response) {
+    var songs = parties[request.partyName];
+    if (!songs) {
+      response.status(404).json('No party found with name ' + request.partyName);
+    }
+    else {
+      response.json(songs);
+    }
+  });
+
 
 
 module.exports = router;
