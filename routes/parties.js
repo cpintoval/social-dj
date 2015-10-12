@@ -1,56 +1,21 @@
 var express = require('express');
 var router = express.Router();
 
-var bodyParser = require('body-parser');
-var parseUrlencoded = bodyParser.urlencoded({ extended: false });
-
 var parties = {
-  'party-1': ["Song 1", "Song 2", "Song 3"],
-  'party-2': ["Song 4", "Song 5", "Song 6"],
-  'party-3': ["Song 7", "Song 8", "Song 9"],
-  'party-4': []
-}; // This should be database query for that specific party id.
+  'party-1': ['Song 1', 'Song 2', 'Song 3'],
+  'party-2': ['Song 4', 'Song 5', 'Song 6']
+};
 
-router.route('/')
-  .get(function(request, response) { // This is going to be the party ID instead.
-    if (request.query.limit >= 0) {
-      response.json(Object.keys(parties.slice(0, request.query.limit)));
-    }
-    else {
-      response.json(Object.keys(parties)); // Sending the parties to the client.
-    }
-  })
-  .post(parseUrlencoded, function(request, response) {
-    var newParty = request.body;
-    parties[newParty.name] = []; // Adding to the database
-    response.status(201).json(newParty.name);
+/* GET parties listing. */
+router.get('/', function(request, response, next) {
+  response.render('parties', { parties: Object.keys(parties) });
+});
+
+router.get('/:name', function(request, response) {
+  response.render('party', {
+    name: request.params.name,
+    songs: parties[request.params.name]
   });
-
-router.route('/:name')
-  // Running pre-conditions on dynamic routes
-  .all(function(request, response, next) {
-    var name = request.params.name;
-    var party = name.toLowerCase();
-    request.partyName = party;
-    next();
-  })
-  .get(function(request, response) {
-    var songs = parties[request.partyName];
-    if (!songs) {
-      response.status(404).json('No party found with name ' + request.partyName);
-    }
-    else if (songs.length === 0) {
-      response.json("This party has no songs...yet.");
-    }
-    else {
-      response.json(songs);
-    }
-  })
-  .delete(function(request, response) {
-    delete parties[request.partyName];
-    response.sendStatus(200);
-  });
-
-
+});
 
 module.exports = router;
