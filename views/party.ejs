@@ -8,7 +8,8 @@
     <h1><%= name %>'s Now Trending</h1>
     <div>
       <form>
-        <input type="text" id='song' name='song' placeholder='Enter a song...'>
+        <input type="text" id='song' list="matching-songs" name='song' placeholder='Enter a song...'>
+        <datalist id="matching-songs"></datalist>
         <input type="submit">
       </form>
     </div>
