@@ -3,6 +3,7 @@ module.exports = function(sequelize, DataTypes) {
   var song = sequelize.define('song', {
     title: DataTypes.STRING,
     album: DataTypes.STRING,
+    artist: DataTypes.STRING,
     votes: DataTypes.INTEGER,
     img_url: DataTypes.STRING,
     spotify_id: DataTypes.STRING

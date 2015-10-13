@@ -14,6 +14,9 @@ module.exports = {
       album: {
         type: Sequelize.STRING
       },
+      artist: {
+        type: Sequelize.STRING
+      },
       votes: {
         type: Sequelize.INTEGER
       },
