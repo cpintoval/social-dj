@@ -7,6 +7,7 @@
 var app = require('../app');
 var debug = require('debug')('social-dj:server');
 var http = require('http');
+var models = require("../models");
 
 /**
  * Get port from environment and store in Express.
@@ -26,23 +27,103 @@ var io = require('socket.io')(server);
  * Listen on provided port, on all network interfaces.
  */
 
-server.listen(port, function() {
-  console.log('Server listening on port ' + port + '...');
-});
-server.on('error', onError);
-server.on('listening', onListening);
+models.sequelize.sync().then(function () {
 
-io.on('connection', function(socket) {
-  console.log('user connected');
+  models.song.destroy({ force: true });
+  models.party.destroy({ force: true });
+  models.dj.destroy({ force: true });
 
-  socket.on('disconnect', function() {
-    console.log('user disconnected');
+  // Seed
+  models.dj.create({
+    name: "Fake DJ",
+    password: "fakepassword",
+    email: "dj@email.com"
+  }).then(function(user) {
+    models.party.create({
+      name: "The Party",
+      active: true,
+      djId: user.id
+    }).then(function(party) {
+
+      models.song.create({
+        title: "Song 1",
+        album: "Dummy Album",
+        artist: "Dummy Artist",
+        votes: 1,
+        img_url: "https://upload.wikimedia.org/wikipedia/en/6/6b/Portishead_-_Dummy.png",
+        spotify_id: "abc",
+        partyId: party.id
+      });
+
+      models.song.create({
+        title: "Dummy Song",
+        album: "Dummy Album 2",
+        artist: "Dummy Artist",
+        votes: 1,
+        img_url: "https://upload.wikimedia.org/wikipedia/en/6/6b/Portishead_-_Dummy.png",
+        spotify_id: "abc",
+        partyId: party.id
+      });
+
+      models.song.create({
+        title: "Back to Back",
+        album: "Back to Back",
+        artist: "Drake",
+        votes: 1,
+        img_url: "https://theauthoritydjs.files.wordpress.com/2015/08/drake_back_2_back-front.jpg",
+        spotify_id: "spotify:track:5lFDtgWsjRJu8fPOAyJIAK",
+        partyId: party.id
+      });
+
+    });
   });
 
-  socket.on('new song', function(song) {
-    io.emit('new song', song);
+  server.listen(port, function() {
+    console.log('Server listening on port ' + port + '...');
   });
+  server.on('error', onError);
+  server.on('listening', onListening);
 
+  io.on('connection', function(socket) {
+    console.log('user connected');
+
+    socket.on('disconnect', function() {
+      console.log('user disconnected');
+    });
+
+    socket.on('new song', function(obj) {
+      models.song.findAll({
+        where: {
+          spotify_id: obj.song.href,
+          partyId: obj.party
+        }
+      }).then(function(response) {
+        console.log(response);
+        if (response.length === 0) {
+          models.song.create({
+            title: obj.song.name,
+            album: obj.song.album.name,
+            artist: obj.song.artists[0].name,
+            votes: 1,
+            img_url: "",
+            spotify_id: obj.song.href,
+            partyId: obj.party
+          }).then(function(song) {
+            io.emit('new song', song);
+          });
+        }
+        else {
+          // Vote for the song
+          var song = response[0];
+          song.increment('votes').then(function(resp) {
+            io.emit('new song', song);
+          });
+        }
+      });
+      
+    });
+
+  });
 });
 
 /**
