@@ -10,7 +10,7 @@
     <h1>Party List</h1>
     <ul id='parties'>
       <% for(var i = 0; i < parties.length; i++) { %>
-      <li><a href=<%= '/parties/' + parties[i] %>><%= parties[i] %></a></li>
+      <li><a href=<%= '/parties/' + parties[i].dataValues.id %>><%= parties[i].dataValues.name %></a></li>
       <% } %>
     </ul>
 

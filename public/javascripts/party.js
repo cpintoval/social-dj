@@ -1,9 +1,14 @@
 $(function() {
   var socket = io();
+  var options = [];
 
   $('form').submit(function(event) {
     event.preventDefault();
-    socket.emit('new song', $('#song').val());
+    var opt = $('option[value="' + $('#song').val() + '"]');
+    socket.emit('new song', {
+      song: options[opt.attr('id')],
+      party: $('#party-name').attr('data')
+    });
     $('#song').val('');
     return false;
   });
@@ -21,17 +26,23 @@ $(function() {
   });
 
   socket.on('new song', function(song) {
-    $('#songs').append($('<li>').text(song));
+    $('#songs').append($('<li>').text(song.title));
   });
 
   function autocomplete(data){
-    var $matching_songs = $('#matching-songs');
-    $matching_songs.empty();
-    var tracks = data.tracks;
-    for(var i=0;i<5;i++){
-        var track = tracks[i];
-        var result = '<option id="' + track.name + '">' + track.name + ' by '+track.artists[0].name +'</option>';
-        $matching_songs.append(result);
+    if (data.tracks) {
+      var $matching_songs = $('#matching-songs');
+      $matching_songs.empty();
+      var tracks = data.tracks;
+      options = [];
+      for(var i=0;i<5;i++){
+          var track = tracks[i];
+          if (track) {
+            options[i] = tracks[i];
+            var result = '<option id="' + i + '" value="' + track.name + ' by ' + track.artists[0].name + '">' + track.name + ' by '+track.artists[0].name +'</option>';
+            $matching_songs.append(result);
+          }
+      }
     }
   }
 

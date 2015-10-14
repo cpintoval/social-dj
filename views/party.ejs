@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title><%= name %></title>
+    <title><%= party.name %></title>
     <link rel='stylesheet' href='/stylesheets/style.css' />
   </head>
   <body>
-    <h1><%= name %>'s Now Trending</h1>
+    <h1 id="party-name" data=<%= party.id %>><%= party.name %> Now Trending</h1>
     <div>
       <form>
         <input type="text" id='song' list="matching-songs" name='song' placeholder='Enter a song...'>
@@ -15,7 +15,7 @@
     </div>
     <ul id='songs'>
       <% for(var i = 0; i < songs.length; i++) { %>
-      <li><%= songs[i] %></li>
+      <li><%= songs[i].title %></li>
       <% } %>
     </ul>
     <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
