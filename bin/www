@@ -29,9 +29,11 @@ var io = require('socket.io')(server);
 
 models.sequelize.sync().then(function () {
 
+
   models.song.destroy({where:{}});
   models.party.destroy({where:{}});
   models.dj.destroy({where:{}});
+
   // Seed
   models.dj.create({
     name: "Tony",
@@ -113,7 +115,10 @@ models.sequelize.sync().then(function () {
         }
         else {
           // Vote for the song
-          // io.emit('new song', song);
+          var song = response[0];
+          song.increment('votes').then(function(resp) {
+            io.emit('new song', song);
+          });
         }
       });
       

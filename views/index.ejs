@@ -27,20 +27,11 @@
       email = $('#email').val();
       password = $('#password').val();
 
-      //NEED TO ADD AUTHENTICATION to check with database//
-      // if (password === "123"){
-
       $.post('http://localhost:3000/', {email: email, password: password}, function(response){
         if (response === 'done'){
           window.location.href="/parties";
         }
-        
       })
-
-      // } else {
-      //   alert('Password is incorrect');
-      // }
-
     })
   })
   </script>
