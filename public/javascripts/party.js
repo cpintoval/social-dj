@@ -29,7 +29,7 @@ $(function() {
     var $songOption = $('#' + song.id);
     console.log($songOption.text() === "");
     if ($songOption.text() === ""){
-      $('#songs').append('<li id="' +  song.id + '">' + song.title + ' - Votes: <span>' + song.votes + '</span></li>');
+      $('#songs').append('<li id="' +  song.id + '">' + '<i class="fa fa-thumbs-up"></i>'+ song.title + ' - Votes: <span>' + song.votes + '</span></li>');
     }
     else {
       $songOption.find('span').text(song.votes);
