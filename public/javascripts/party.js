@@ -26,7 +26,15 @@ $(function() {
   });
 
   socket.on('new song', function(song) {
-    $('#songs').append($('<li>').text(song.title));
+    var $songOption = $('#' + song.id);
+    console.log($songOption.text() === "");
+    if ($songOption.text() === ""){
+      $('#songs').append('<li id="' +  song.id + '">' + song.title + ' - Votes: <span>' + song.votes + '</span></li>');
+    }
+    else {
+      $songOption.find('span').text(song.votes);
+    }
+    // $('#songs').append($('<li>').text(song.title + ' - Votes: ' + song.votes).attr('id', song.id));
   });
 
   function autocomplete(data){
