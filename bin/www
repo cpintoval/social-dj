@@ -33,7 +33,6 @@ models.sequelize.sync().then(function () {
   models.song.destroy({where:{}});
   models.party.destroy({where:{}});
   models.dj.destroy({where:{}});
-
   // Seed
   models.dj.create({
     name: "Tony",
@@ -125,7 +124,21 @@ models.sequelize.sync().then(function () {
         io.emit('error');
       }
     });
-
+    
+    socket.on('new vote',function(obj){
+      console.log('second click');
+      models.song.findAll({
+        where: {
+          id: obj.song,
+          partyId: obj.party
+        }
+      }).then(function(response){
+        var song = response[0];
+        song.increment('votes').then(function(res){
+          io.emit('new vote',res);
+        });
+      });
+    });
   });
 });
 
