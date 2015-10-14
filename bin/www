@@ -29,9 +29,10 @@ var io = require('socket.io')(server);
 
 models.sequelize.sync().then(function () {
 
-  models.song.destroy();
-  models.party.destroy();
-  models.dj.destroy();
+  models.song.destroy({ force: true });
+  models.party.destroy({ force: true });
+  models.dj.destroy({ force: true });
+
   // Seed
   models.dj.create({
     name: "Fake DJ",
@@ -113,7 +114,10 @@ models.sequelize.sync().then(function () {
         }
         else {
           // Vote for the song
-          // io.emit('new song', song);
+          var song = response[0];
+          song.increment('votes').then(function(resp) {
+            io.emit('new song', song);
+          });
         }
       });
       

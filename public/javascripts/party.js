@@ -26,7 +26,7 @@ $(function() {
   });
 
   socket.on('new song', function(song) {
-    $('#songs').append($('<li>').text(song.title));
+    $('#songs').append($('<li>').text(song.title + ' - Votes: ' + song.votes));
   });
 
   function autocomplete(data){
