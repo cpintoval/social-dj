@@ -1,7 +1,9 @@
 var express = require('express');
 var router = express.Router();
 var session = require('express-session');
+var models = require("../models");
 var sess;
+
 
 /* GET home page. */
 router.get('/', function(request, response) {
@@ -13,18 +15,6 @@ router.get('/', function(request, response) {
     response.render('index', {title: 'Login page'});
   }
 });
-
-// router.get('/admin', function(req, res){
-//   if (sess.email){
-//     res.render('parties', { 
-//         title: 'HeyDJ',
-//         email: sess.email,
-//         password: sess.password
-//          });
-//   } else {
-//     res.redirect('/');
-//   }
-// });
 
 router.get('/logout', function(request, response){
   request.session.destroy(function(err){
@@ -38,9 +28,21 @@ router.get('/logout', function(request, response){
 
 router.post('/', function(request,response){
   sess = request.session;
-  sess.email = request.body.email;
-  sess.password = request.body.password;
-  response.end('done');
+  
+  models.dj.findAll({
+    where: {
+      email: request.body.email
+    }
+  }).then(function(res){
+
+    if (res[0].dataValues.password === request.body.password){
+      sess.email = request.body.email;
+      sess.password = request.body.password;
+      response.end('done');
+    } else {
+      response.status(500).send({error: 'Something blew up!'});
+    }
+  })
 });
 
 module.exports = router;
