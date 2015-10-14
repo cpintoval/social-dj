@@ -37,6 +37,11 @@ $(function() {
     // $('#songs').append($('<li>').text(song.title + ' - Votes: ' + song.votes).attr('id', song.id));
   });
 
+  //for error handing in the song input
+  socket.on('error', function(){
+    alert('The song name you entered is not valid!');
+  });
+
   function autocomplete(data){
     if (data.tracks) {
       var $matching_songs = $('#matching-songs');
