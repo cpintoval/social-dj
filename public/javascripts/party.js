@@ -17,7 +17,8 @@ $(function() {
     console.log('first click');
     socket.emit('new vote',{
       song: $(this).parent().attr('id'),
-      party: $('#party-name').attr('data')
+      party: $('#party-name').attr('data'),
+      cookie: x
     });
   });
 
@@ -52,7 +53,6 @@ $(function() {
       $songToIncrement.find('span').text(song.votes);
     }
   });
-
   function autocomplete(data){
     if (data.tracks) {
       var $matching_songs = $('#matching-songs');
@@ -69,7 +69,7 @@ $(function() {
       }
     }
   }
-
-
+  document.cookie = "username=joe";
+  var x = document.cookie;
 });
 
