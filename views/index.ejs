@@ -79,10 +79,10 @@
       <input type="button" id="signup-button" value="Signup"></input>
     </form>
 
-    <form id="signin">
-      <input type="text" size="30" placeholder="Signin with your email here" id="email"><br/>
+    <form id="login">
+      <input type="text" size="30" placeholder="Login with your email here" id="email"><br/>
       <input type="password" size="30" placeholder="Password here" id="password"><br/>
-      <input type="button" id="signin-button" value="login"></input>
+      <input type="button" id="login-button" value="login"></input>
       </form>
   </body>
 
@@ -94,7 +94,7 @@
 
     var email, password;
 
-    $('#signin-button').click(function(event){
+    $('#login-button').click(function(event){
       event.preventDefault();
       email = $('#email').val();
       password = $('#password').val();
