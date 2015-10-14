@@ -122,7 +122,20 @@ models.sequelize.sync().then(function () {
       });
 
     });
-
+    socket.on('new vote',function(obj){
+      console.log('second click');
+      models.song.findAll({
+        where: {
+          id: obj.song,
+          partyId: obj.party
+        }
+      }).then(function(response){
+        var song = response[0];
+        song.increment('votes').then(function(res){
+          io.emit('new vote',res);
+        });
+      });
+    });
   });
 });
 
