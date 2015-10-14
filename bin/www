@@ -29,9 +29,9 @@ var io = require('socket.io')(server);
 
 models.sequelize.sync().then(function () {
 
-  models.song.destroy({ force: true });
-  models.party.destroy({ force: true });
-  models.dj.destroy({ force: true });
+  models.song.destroy({ where: {} });
+  models.party.destroy({ where: {} });
+  models.dj.destroy({ where: {} });
 
   // Seed
   models.dj.create({
@@ -120,7 +120,7 @@ models.sequelize.sync().then(function () {
           });
         }
       });
-      
+
     });
 
   });
