@@ -42,7 +42,7 @@ router.get('/:id', function(request, response) {
         }).then(function(songs){
           
           response.render('party', {
-            name: party.name,
+            party: party,
             songs: songs
           });
         });

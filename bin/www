@@ -90,8 +90,33 @@ models.sequelize.sync().then(function () {
       console.log('user disconnected');
     });
 
-    socket.on('new song', function(song) {
-      io.emit('new song', song);
+    socket.on('new song', function(obj) {
+      models.song.findAll({
+        where: {
+          spotify_id: obj.song.href,
+          partyId: obj.party
+        }
+      }).then(function(response) {
+        console.log(response);
+        if (response.length === 0) {
+          models.song.create({
+            title: obj.song.name,
+            album: obj.song.album.name,
+            artist: obj.song.artists[0].name,
+            votes: 1,
+            img_url: "",
+            spotify_id: obj.song.href,
+            partyId: obj.party
+          }).then(function(song) {
+            io.emit('new song', song);
+          });
+        }
+        else {
+          // Vote for the song
+          // io.emit('new song', song);
+        }
+      });
+      
     });
 
   });
