@@ -30,7 +30,8 @@ app.use(session({
   name: 'dj-cookie',
   resave: true,
   saveUninitialized: true,
-  cookie: { path: '/'}
+  cookie: { path: '/',
+  httpOnly: false}
 }));
 app.use(usersession({
   secret: 'ninjadj',

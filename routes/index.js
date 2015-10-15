@@ -10,7 +10,7 @@ router.get('/', function(request, response) {
   sess = request.session;
 
   if (sess.email){
-    response.redirect('/parties');  
+    response.redirect('/parties');
   } else {
     response.render('index');
   }
@@ -23,12 +23,12 @@ router.get('/logout', function(request, response){
     } else {
       response.redirect('/');
     }
-  })
+  });
 });
 
 router.post('/', function(request,response){
   sess = request.session;
-  
+
   models.dj.findAll({
     where: {
       email: request.body.email
@@ -43,11 +43,11 @@ router.post('/', function(request,response){
       } else {
         response.send({message: 'The password did not match!'});
       }
-      
+
     } else {
       response.send({message: 'A dj account with the email you provided does not exist!'});
     }
-  })
+  });
 });
 
 router.post('/signup', function(request,response){
@@ -60,7 +60,7 @@ router.post('/signup', function(request,response){
   }).then(function(res){
 
     if (res.length !== 0){
-      
+
       response.send({message: 'A DJ with that email already exists! Please signin or signup with a different email!'});
 
     } else {
@@ -74,7 +74,7 @@ router.post('/signup', function(request,response){
         email: request.body.email
       }).then(response.end('done'));
     }
-  })
+  });
 });
 
 module.exports = router;

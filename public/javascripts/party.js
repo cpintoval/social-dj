@@ -1,9 +1,8 @@
 $(function() {
   var socket = io();
   var options = [];
-  document.cookie = "username=joe";
-  x = document.cookie;
-  console.log(x,"first time");
+
+  x = Cookies.get('dj-cookie');
 
   $('form').submit(function(event) {
     event.preventDefault();
@@ -80,4 +79,5 @@ $(function() {
   }
 
 });
+
 
