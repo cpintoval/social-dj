@@ -17,7 +17,7 @@
     </div>
     <ul id='songs'>
       <% for(var i = 0; i < songs.length; i++) { %>
-      <li id=<%= songs[i].id %>><i class="fa fa-thumbs-up" id="upvote" ></i><%= songs[i].title %><span> VoteCount: <%=songs[i].voteCount%></span></li>
+      <li id=<%= songs[i].id %>><i class="fa fa-thumbs-up" id="upvote" ></i><%= songs[i].title %><span> VoteCount: <%=songs[i].voteCount%></span><i class="fa fa-trash-o" id="delete"></i></li>
       <% } %>
     </ul>
     <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
