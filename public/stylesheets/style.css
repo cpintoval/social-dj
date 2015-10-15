@@ -59,3 +59,12 @@ body {
 #music-icon {
   color: #ff6600;
 }
+
+.header-mod {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 100;
+}
+
+#djsignup {
+  padding: 10%;
+}
