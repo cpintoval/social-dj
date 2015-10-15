@@ -13,8 +13,8 @@ var parties = {
 /* GET parties listing. */
 router.get('/', function(request, response, next) {
   sess = request.session;
-  if (sess.email){
 
+<<<<<<< HEAD
     var ps = models.party.findAll().then(function(parties) {
       response.render('parties', {
         parties: parties,
@@ -22,11 +22,49 @@ router.get('/', function(request, response, next) {
         password: sess.password
       });
     });
+=======
+  models.dj.findOne({
+    where: {
+      email: sess.email
+    }}).then(function(dj){
 
-  } else {
+      if (sess.email){
+        models.party.findAll({
+          where: {
+            djId: dj.dataValues.id
+          }
+        }).then(function(parties) {
+          response.render('parties', {
+            parties: parties,
+            email: sess.email,
+            password: sess.password 
+          });
+        });
+>>>>>>> master
 
-    response.redirect('/');
-  }
+      } else {
+
+        response.redirect('/');
+      }
+    })
+});
+
+router.post('/', function(request, response){
+  sess = request.session;
+
+  models.dj.findOne({
+    where: { 
+      email: sess.email
+    }
+  }).then(function(dj){
+      models.party.create({
+        name: request.body.partyName,
+        active: true,
+        djId: dj.id
+      }).then(function(party){
+        response.send(party);
+      })
+    })
 });
 
 router.get('/:id', function(request, response) {

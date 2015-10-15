@@ -56,6 +56,15 @@ $(function() {
       $songToIncrement.find('span').text(song.voteCount);
     }
   });
+<<<<<<< HEAD
+=======
+
+  //for error handing in the song input
+  socket.on('error', function(){
+    alert('The song name you entered is not valid!');
+  });
+
+>>>>>>> master
   function autocomplete(data){
     if (data.tracks) {
       var $matching_songs = $('#matching-songs');

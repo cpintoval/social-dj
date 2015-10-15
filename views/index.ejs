@@ -9,30 +9,22 @@
     <h1><%= title %></h1>
     <p>Welcome to <%= title %></p>
 
+    <form id="signup">
+      <input type="text" size="30" placeholder="Signup with your email here" id="new-email"><br/>
+      <input type="password" size="30" placeholder="Password here" id="new-password"><br/>
+      <input type="button" id="signup-button" value="Signup"></input>
+    </form>
 
-    <input type="text" size="30" placeholder="Type your email here" id="email"><br/>
-    <input type="password" size="30" placeholder="Type your password here" id="password"><br/>
-    <input type="button" id="button" value="login"></input>
+    <form id="login">
+      <input type="text" size="30" placeholder="Login with your email here" id="email"><br/>
+      <input type="password" size="30" placeholder="Password here" id="password"><br/>
+      <input type="button" id="login-button" value="login"></input>
+      </form>
   </body>
 
   <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="/javascripts/index.js"></script>
   <script>
-
-  $(document).ready(function(){
-
-    var email, password;
-
-    $('#button').click(function(){
-
-      email = $('#email').val();
-      password = $('#password').val();
-
-      $.post('http://localhost:3000/', {email: email, password: password}, function(response){
-        if (response === 'done'){
-          window.location.href="/parties";
-        }
-      })
-    })
-  })
   </script>
 </html>

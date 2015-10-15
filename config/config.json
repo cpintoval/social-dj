@@ -1,6 +1,6 @@
 {
   "development": {
-    "username": "machine",
+    "username": "development",
     "password": "development",
     "database": "socialdj",
     "dialect": "postgres"

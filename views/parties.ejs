@@ -8,11 +8,29 @@
 
     <p>Hello, <%= email %>. Welcome back! Your password is <%= password %></p><br/><br/> 
     <h1>Party List</h1>
+    <ul id='created-parties'>
+      <% for(var i = 0; i < parties.length; i++) { %>
+        <% if(parties[i].dataValues.active === true){ %>
+        <li><a href=<%= '/parties/' + parties[i].dataValues.id %>><%= parties[i].dataValues.name %></a></li>
+        <% } %>
+      <% } %>
+
+    </ul>
+
+    <h2>Old Party List</h2>
     <ul id='parties'>
       <% for(var i = 0; i < parties.length; i++) { %>
-      <li><a href=<%= '/parties/' + parties[i].dataValues.id %>><%= parties[i].dataValues.name %></a></li>
+        <% if(parties[i].dataValues.active === false){ %>
+        <li><a href=<%= '/parties/' + parties[i].dataValues.id %>><%= parties[i].dataValues.name %></a></li>
+        <% } %>
       <% } %>
+
     </ul>
+
+    <form id="newparty-form">
+      <input type="text" size="30" placeholder="Type your new party name here" id="new-party"><br/>
+      <input type="button" id="newparty-button" value="Create Party"></input>
+    </form>
 
     <a href="/logout">Logout</a>
     
