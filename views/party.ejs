@@ -1,28 +1,106 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <title><%= party.name %></title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
-    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <link rel="stylesheet" href="/stylesheets/framework7/framework7.ios.min.css">
+    <link rel="stylesheet" href="/stylesheets/framework7/framework7.ios.colors.min.css">
+    <link rel='stylesheet' href='/stylesheets/party.css' />
+
     <script src="/javascripts/js.cookie.js"></script>
   </head>
   <body>
-    <h1 id="party-name" data=<%= party.id %>><%= party.name %> Now Trending</h1>
-    <div>
-      <form>
-        <input type="text" id='song' list="matching-songs" name='song' placeholder='Enter a song...'>
-        <datalist id="matching-songs"></datalist>
-        <input type="submit">
-      </form>
+
+    <!-- Statusbar overlay-->
+    <div class="statusbar-overlay"></div>
+    <!-- Main views-->
+    <div class="views">
+      <div class="view view-main navbar-through">
+        <div class="navbar">
+          <div class="navbar-inner">
+            <div class="center sliding"><span class="navbar-logo"></span></div>
+            <div class="right"><a href="#" class="open-popup link icon-only"><i class="icon icon-plus">+</i></a></div>
+          </div>
+        </div>
+        <div class="pages">
+          <div data-page="index" class="page">
+            <div class="page-content">
+              <div class="list-block places-list">
+                <ul></ul>
+                <!-- <div class="list-block-label"><img src="img/yahoo-logo.png" height="20"></div> -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-    <ul id='songs'>
-      <% for(var i = 0; i < songs.length; i++) { %>
-      <li id=<%= songs[i].id %>><i class="fa fa-thumbs-up" id="upvote" ></i><%= songs[i].title %><span> VoteCount: <%=songs[i].voteCount%></span></li>
-      <% } %>
-    </ul>
+    <!-- Search popup-->
+    <div class="popup">
+      <div class="view navbar-fixed">
+        <div class="navbar">
+          <div class="navbar-inner">
+            <div class="left">
+              <input type="text" placeholder="Search your song...">
+              <div class="preloader preloader-white"></div>
+            </div>
+            <div class="right"><a href="#" class="link close-popup">Cancel</a></div>
+          </div>
+        </div>
+        <div class="pages">
+          <div class="page">
+            <div class="page-content">
+              <ul class="search-results"></ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Templates-->
+    <script id="search-results-template" type="text/template">
+      {{#each this}}
+      {{#if admin1}}{{#if admin1.content}}
+      <li data-woeid="{{woeid}}" data-city="{{name}}" data-country="{{country.content}}" class="close-popup">{{name}} <span>{{admin1.content}}, {{country.content}}</span></li>{{/if}}{{/if}}
+      {{/each}}
+    </script>
+    <script id="home-items-template" type="text/template">{{#each this}}
+      <li data-woeid="{{woeid}}" class="swipeout">
+        <div class="swipeout-content"><a href="#" data-woeid="{{woeid}}" class="item-content item-link">
+            <div class="item-inner">
+              <div class="item-title">
+                <div class="city">{{city}}</div>
+                <div class="country">{{country}}</div>
+              </div>
+              <div class="item-after">{{condition.temp}}&deg;</div>
+            </div></a></div>
+        <div class="swipeout-actions-right"><a href="#" class="swipeout-delete">Delete</a></div>
+      </li>{{/each}}
+    </script>
+
+
     <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
     <script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
     <script src="/socket.io/socket.io.js"></script>
+    <script src="/javascripts/framework7/framework7.min.js"></script>
     <script src="/javascripts/party.js"></script>
   </body>
 </html>
+
+
+
+<!-- <h1 id="party-name" data=<%= party.id %>><%= party.name %> Now Trending</h1>
+<div>
+  <form>
+    <input type="text" id='song' list="matching-songs" name='song' placeholder='Enter a song...'>
+    <datalist id="matching-songs"></datalist>
+    <input type="submit">
+  </form>
+</div>
+<ul id='songs'>
+  <% for(var i = 0; i < songs.length; i++) { %>
+  <li id=<%= songs[i].id %>><i class="fa fa-thumbs-up" id="upvote" ></i><%= songs[i].title %><span> VoteCount: <%=songs[i].voteCount%></span></li>
+  <% } %>
+</ul> -->

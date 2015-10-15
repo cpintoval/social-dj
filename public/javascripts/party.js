@@ -1,4 +1,63 @@
 $(function() {
+
+  // Framework 7 Functionalities
+
+  // Initialize app
+  var myApp = new Framework7();
+
+  myApp.searchResultsTemplate = Template7.compile($('#search-results-template').html());
+  myApp.homeItemsTemplate = Template7.compile($('#home-items-template').html());
+
+  // Add view
+  var mainView = myApp.addView('.view-main', {
+      dynamicNavbar: true,
+  });
+
+  // Search Songs
+  var searchTimeout;
+  myApp.searchLocation = function (search) {
+      var query = encodeURIComponent('select * from geo.places where text="' + search + '"');
+      var q = 'http://query.yahooapis.com/v1/public/yql?q=' + query + '&format=json';
+      if (searchTimeout) clearTimeout(searchTimeout);
+      $('.popup .preloader').show();
+      searchTimeout = setTimeout(function () {
+          $.getJSON(q, function (results) {
+              var html = '';
+              
+              $('.popup .preloader').hide();
+              if (results.query.count > 0) {
+                  var places = results.query.results.place;
+                  html = myApp.searchResultsTemplate(places);
+              }
+              $('.popup .search-results').html(html);
+          });
+      }, 300);
+  };
+
+  // Handle search results
+  $('.popup input[type="text"]').on('change keyup keydown', function () {
+      console.log(this.value);
+      myApp.searchLocation(this.value);
+  });
+  $('.popup').on('closed', function () {
+      $('.popup input[type="text"]').val('');
+      $('.popup .search-results').html('');
+      $('.popup .preloader').hide();
+  });
+  $('.popup').on('open', function () {
+      $('.views').addClass('blured');
+      $('.statusbar-overlay').addClass('with-popup-opened');
+  });
+  $('.popup').on('opened', function () {
+      $('.popup input[type="text"]')[0].focus();
+  });
+  $('.popup').on('close', function () {
+      $('.views').removeClass('blured');
+      $('.popup input[type="text"]')[0].blur();
+      $('.statusbar-overlay').removeClass('with-popup-opened');
+  });
+
+  // Sockets and jQuery
   var socket = io();
   var options = [];
 
