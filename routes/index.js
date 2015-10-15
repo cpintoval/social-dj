@@ -12,7 +12,7 @@ router.get('/', function(request, response) {
   if (sess.email){
     response.redirect('/parties');  
   } else {
-    response.render('index', {title: 'Login page'});
+    response.render('index');
   }
 });
 
