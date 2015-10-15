@@ -4,7 +4,7 @@ module.exports = function(sequelize, DataTypes) {
     title: DataTypes.STRING,
     album: DataTypes.STRING,
     artist: DataTypes.STRING,
-    votes: DataTypes.INTEGER,
+    voteCount: DataTypes.INTEGER,
     img_url: DataTypes.STRING,
     spotify_id: DataTypes.STRING
   }, {
@@ -16,7 +16,8 @@ module.exports = function(sequelize, DataTypes) {
           foreignKey: {
             allowNull: false
           }
-        });
+        }),
+        song.hasMany(models.vote);
       }
     }
   });

@@ -1,22 +1,25 @@
 'use strict';
 module.exports = function(sequelize, DataTypes) {
-  var party = sequelize.define('party', {
-    name: DataTypes.STRING,
-    active: DataTypes.BOOLEAN
+  var vote = sequelize.define('vote', {
+    cookie: DataTypes.STRING
   }, {
     classMethods: {
       associate: function(models) {
         // associations can be defined here
-        party.hasMany(models.song),
-        party.belongsTo(models.dj, {
+      vote.belongsTo(models.party, {
+        onDelete: "CASCADE",
+        foreignKey: {
+          allowNull: false
+        }
+      }),
+      vote.belongsTo(models.song, {
           onDelete: "CASCADE",
           foreignKey: {
             allowNull: false
           }
-        }),
-        party.hasMany(models.vote);
+        });
       }
     }
   });
-  return party;
+  return vote;
 };

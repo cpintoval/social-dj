@@ -49,7 +49,7 @@ models.sequelize.sync().then(function () {
         title: "Song 1",
         album: "Dummy Album",
         artist: "Dummy Artist",
-        votes: 1,
+        voteCount: 1,
         img_url: "https://upload.wikimedia.org/wikipedia/en/6/6b/Portishead_-_Dummy.png",
         spotify_id: "abc",
         partyId: party.id
@@ -59,7 +59,7 @@ models.sequelize.sync().then(function () {
         title: "Dummy Song",
         album: "Dummy Album 2",
         artist: "Dummy Artist",
-        votes: 1,
+        voteCount: 1,
         img_url: "https://upload.wikimedia.org/wikipedia/en/6/6b/Portishead_-_Dummy.png",
         spotify_id: "abc",
         partyId: party.id
@@ -69,7 +69,7 @@ models.sequelize.sync().then(function () {
         title: "Back to Back",
         album: "Back to Back",
         artist: "Drake",
-        votes: 1,
+        voteCount: 1,
         img_url: "https://theauthoritydjs.files.wordpress.com/2015/08/drake_back_2_back-front.jpg",
         spotify_id: "spotify:track:5lFDtgWsjRJu8fPOAyJIAK",
         partyId: party.id
@@ -104,7 +104,7 @@ models.sequelize.sync().then(function () {
               title: obj.song.name,
               album: obj.song.album.name,
               artist: obj.song.artists[0].name,
-              votes: 1,
+              voteCount: 0,
               img_url: "",
               spotify_id: obj.song.href,
               partyId: obj.party
@@ -115,7 +115,7 @@ models.sequelize.sync().then(function () {
           else {
             // Vote for the song
             var song = response[0];
-            song.increment('votes').then(function(resp) {
+            song.increment('voteCount').then(function(resp) {
               io.emit('new song', song);
             });
           }
@@ -124,19 +124,37 @@ models.sequelize.sync().then(function () {
         io.emit('error');
       }
     });
-    
+
     socket.on('new vote',function(obj){
       console.log('second click');
-      models.song.findAll({
-        where: {
-          id: obj.song,
-          partyId: obj.party
+      models.vote.findAll({
+        where:{
+          songId: obj.song,
+          partyId: obj.party,
+          cookie: obj.cookie
         }
       }).then(function(response){
-        var song = response[0];
-        song.increment('votes').then(function(res){
-          io.emit('new vote',res);
-        });
+        if (response.length === 0){
+          console.log(obj.party,obj.song);
+          models.vote.create({
+            partyId: obj.party,
+            songId: obj.song,
+            cookie: obj.cookie
+          });
+          models.song.findAll({
+            where: {
+            id: obj.song,
+            partyId: obj.party
+            }
+          }).then(function(response){
+            var song = response[0];
+            song.increment('voteCount').then(function(res){
+            io.emit('new vote',res);
+            });
+          });
+        } else{
+          console.log("already voted!");
+        }
       });
     });
   });

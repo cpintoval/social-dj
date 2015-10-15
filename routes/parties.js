@@ -28,22 +28,21 @@ router.get('/', function(request, response, next) {
           response.render('parties', {
             parties: parties,
             email: sess.email,
-            password: sess.password 
+            password: sess.password
           });
         });
-
       } else {
 
         response.redirect('/');
       }
-    })
+    });
 });
 
 router.post('/', function(request, response){
   sess = request.session;
 
   models.dj.findOne({
-    where: { 
+    where: {
       email: sess.email
     }
   }).then(function(dj){
@@ -53,8 +52,8 @@ router.post('/', function(request, response){
         djId: dj.id
       }).then(function(party){
         response.send(party);
-      })
-    })
+      });
+    });
 });
 
 router.get('/:id', function(request, response) {
@@ -68,7 +67,7 @@ router.get('/:id', function(request, response) {
             partyId: partyID
           }
         }).then(function(songs){
-          
+
           response.render('party', {
             party: party,
             songs: songs
@@ -80,7 +79,7 @@ router.get('/:id', function(request, response) {
           message: 'This party does not exist',
           error: {
             status: '404',
-            stack: 'Stack too deep'
+            stack: 'Stack level waaay too deep'
           }
         });
       }
