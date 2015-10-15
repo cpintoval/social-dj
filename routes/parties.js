@@ -14,15 +14,6 @@ var parties = {
 router.get('/', function(request, response, next) {
   sess = request.session;
 
-<<<<<<< HEAD
-    var ps = models.party.findAll().then(function(parties) {
-      response.render('parties', {
-        parties: parties,
-        email: sess.email,
-        password: sess.password
-      });
-    });
-=======
   models.dj.findOne({
     where: {
       email: sess.email
@@ -37,23 +28,21 @@ router.get('/', function(request, response, next) {
           response.render('parties', {
             parties: parties,
             email: sess.email,
-            password: sess.password 
+            password: sess.password
           });
         });
->>>>>>> master
-
       } else {
 
         response.redirect('/');
       }
-    })
+    });
 });
 
 router.post('/', function(request, response){
   sess = request.session;
 
   models.dj.findOne({
-    where: { 
+    where: {
       email: sess.email
     }
   }).then(function(dj){
@@ -63,8 +52,8 @@ router.post('/', function(request, response){
         djId: dj.id
       }).then(function(party){
         response.send(party);
-      })
-    })
+      });
+    });
 });
 
 router.get('/:id', function(request, response) {
