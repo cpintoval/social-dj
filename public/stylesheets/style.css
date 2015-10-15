@@ -1,6 +1,6 @@
 body {
-  font-family: 'Nunito', sans-serif;
-  color: white;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 100;
 }
 
 .hero {
@@ -8,12 +8,14 @@ body {
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-position: center;
-  padding: 14%;
+  padding: 15%;
   text-align: center;
+  color: white;
 }
 
 .header {
-  font-family: 'Nunito', sans-serif;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 100;
   color: white;
 }
 
@@ -22,7 +24,16 @@ body {
   height: 
 }
 
-#navbar, .divider, .dropdown {
-  font-family: 'Nunito', sans-serif;
+#navbar {
+  font-family: 'Roboto', sans-serif !important;
   background: #ff6600 !important;
+}
+
+#logo {
+  font-weight: 100;
+  color: white;
+}
+
+#music-icon {
+  color: #ff6600;
 }
