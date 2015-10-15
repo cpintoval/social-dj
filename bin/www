@@ -29,11 +29,12 @@ var io = require('socket.io')(server);
 
 models.sequelize.sync().then(function () {
 
-  // models.vote.destroy({where:{}});
+
+
   // models.song.destroy({where:{}});
   // models.party.destroy({where:{}});
   // models.dj.destroy({where:{}});
-  // Seed
+  // // Seed
   // models.dj.create({
   //   name: "Tony",
   //   password: "fakepassword",
@@ -92,7 +93,9 @@ models.sequelize.sync().then(function () {
     });
 
     socket.on('new song', function(obj) {
+      var nsp = io.of('/' + obj.party);
       if(obj.song){
+        // console.log(obj);
         models.song.findAll({
           where: {
             spotify_id: obj.song.href,
@@ -109,24 +112,25 @@ models.sequelize.sync().then(function () {
               spotify_id: obj.song.href,
               partyId: obj.party
             }).then(function(song) {
-              io.emit('new song', song);
+              
+              nsp.emit('new song', song);
             });
           }
           else {
             // Vote for the song
             var song = response[0];
             song.increment('voteCount').then(function(resp) {
-              io.emit('new song', song);
+              nsp.emit('new song', song);
             });
           }
         });
       } else {
-        io.emit('error');
+        nsp.emit('error');
       }
     });
 
     socket.on('new vote',function(obj){
-      console.log('second click');
+      console.log(obj);
       models.vote.findAll({
         where:{
           songId: obj.song,
