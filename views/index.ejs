@@ -15,48 +15,16 @@
       <input type="button" id="signup-button" value="Signup"></input>
     </form>
 
-    <form id="signin">
-      <input type="text" size="30" placeholder="Signin with your email here" id="email"><br/>
+    <form id="login">
+      <input type="text" size="30" placeholder="Login with your email here" id="email"><br/>
       <input type="password" size="30" placeholder="Password here" id="password"><br/>
-      <input type="button" id="signin-button" value="login"></input>
+      <input type="button" id="login-button" value="login"></input>
       </form>
   </body>
 
   <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="/javascripts/index.js"></script>
   <script>
-
-  $(document).ready(function(){
-
-    var email, password;
-
-    $('#signin-button').click(function(event){
-      event.preventDefault();
-      email = $('#email').val();
-      password = $('#password').val();
-
-      $.post('http://localhost:3000/', {email: email, password: password}, function(response){
-        if (response === 'done'){
-          window.location.href="/parties";
-        } else {
-          alert(response.message);
-          console.log(response.statusCode);
-        }
-      })
-    })
-
-    $('#signup-button').click(function(event){
-      event.preventDefault();
-      email = $('#new-email').val();
-      password = $('#new-password').val();
-
-      $.post('http://localhost:3000/signup', {email: email, password: password}, function(response){
-        if (response === 'done'){
-          window.location.href="/parties";
-        } else {
-          alert(response.message);
-        }
-      })
-    })
-  })
   </script>
 </html>
