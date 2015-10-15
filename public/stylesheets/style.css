@@ -3,7 +3,7 @@ body {
   font-weight: 100;
 }
 
-.hero {
+.hero-mobile {
   background: url('http://images2.alphacoders.com/701/70172.jpg');
   background-repeat: no-repeat;
   background-attachment: fixed;
@@ -13,7 +13,23 @@ body {
   color: white;
 }
 
+.hero {
+  background: url('http://images2.alphacoders.com/701/70172.jpg');
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: center;
+  padding: 13%;
+  text-align: center;
+  color: white;
+}
+
 .header {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 100;
+  color: white;
+}
+
+.header-mobile {
   font-family: 'Roboto', sans-serif;
   font-weight: 100;
   color: white;
@@ -30,6 +46,12 @@ body {
 }
 
 #logo {
+  font-weight: 100;
+  color: white;
+  font-size: 5em;
+}
+
+#logo-mobile {
   font-weight: 100;
   color: white;
 }
