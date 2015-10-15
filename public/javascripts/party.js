@@ -1,6 +1,9 @@
 $(function() {
   var socket = io();
   var options = [];
+  document.cookie = "username=joe";
+  x = document.cookie;
+  console.log(x,"first time");
 
   $('form').submit(function(event) {
     event.preventDefault();
@@ -38,19 +41,19 @@ $(function() {
     var $songOption = $('#' + song.id);
     console.log($songOption.text() === "");
     if ($songOption.text() === ""){
-      $('#songs').append('<li id="' +  song.id + '">' + '<i class="fa fa-thumbs-up" id="upvote"></i>'+ song.title + ' - Votes: <span>' + song.votes + '</span></li>');
+      $('#songs').append('<li id="' +  song.id + '">' + '<i class="fa fa-thumbs-up" id="upvote"></i>'+ song.title + ' - VoteCount: <span>' + song.voteCount + '</span></li>');
     }
     else {
-      $songOption.find('span').text(song.votes);
+      $songOption.find('span').text(song.voteCount);
     }
-    // $('#songs').append($('<li>').text(song.title + ' - Votes: ' + song.votes).attr('id', song.id));
+    // $('#songs').append($('<li>').text(song.title + ' - VoteCount: ' + song.voteCount).attr('id', song.id));
   });
   socket.on('new vote',function(song){
     var $songToIncrement = $('#' + song.id);
     if ($songToIncrement.text() === ""){
-      $('#songs').append("Votes: <span>" + song.votes + "</span></li>");
+      $('#songs').append("VoteCount: <span>" + song.voteCount + "</span></li>");
     }else{
-      $songToIncrement.find('span').text(song.votes);
+      $songToIncrement.find('span').text(song.voteCount);
     }
   });
   function autocomplete(data){
@@ -69,7 +72,6 @@ $(function() {
       }
     }
   }
-  document.cookie = "username=joe";
-  var x = document.cookie;
+
 });
 
