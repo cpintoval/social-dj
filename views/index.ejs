@@ -1,30 +1,130 @@
 <!DOCTYPE html>
 <html>
   <head>
-  THIS PAGE IS FOR LOGIN
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title><%= title %></title>
+    <link rel='stylesheet' href='http://cdn.foundation5.zurb.com/foundation.css' />
+    <link href='https://fonts.googleapis.com/css?family=Roboto:400,100,300,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
     <link rel='stylesheet' href='/stylesheets/style.css' />
   </head>
   <body>
-    <h1><%= title %></h1>
-    <p>Welcome to <%= title %></p>
 
-    <form id="signup">
-      <input type="text" size="30" placeholder="Signup with your email here" id="new-email"><br/>
-      <input type="password" size="30" placeholder="Password here" id="new-password"><br/>
-      <input type="button" id="signup-button" value="Signup"></input>
-    </form>
+    <nav id="navbar" class="top-bar" data-topbar>
+          <ul class="title-area">
+             
+            <li class="name">
+              <h1>
+                <a href="#">
+                  <i class="fa fa-music"></i>
+                  <span id="logo-navbar">Social DJ</span>
+                </a>
+              </h1>
+            </li>
+            <li class="toggle-topbar menu-icon"><a href="#"><span>menu</span></a></li>
+          </ul>
 
-    <form id="login">
-      <input type="text" size="30" placeholder="Login with your email here" id="email"><br/>
-      <input type="password" size="30" placeholder="Password here" id="password"><br/>
-      <input type="button" id="login-button" value="login"></input>
+          <section class="top-bar-section">
+            <ul class="right">
+              <li class="divider"></li>
+              <li><a href="#" data-reveal-id="loginModal">Login</a></li>
+            </ul>
+          </section>
+        </nav>
+    
+    <div class="hero-mobile show-for-small-only">
+      <div class="row">
+        <div class="small-12 large-12 columns">
+          <h1 id="logo-mobile"> <i id="music-icon" class="fa fa-music"></i> Social DJ</h1>
+        </div>
+        <div class="small-12 large-12 columns">
+          <h3 class="header-mobile">Let the crowd choose the songs</h3>
+          <p>Join a party and start choosing the songs you want to listen</p>
+          <form id="party-search">
+            <div class="row">
+              <div class="large-12 columns">
+                <div class="row collapse postfix-round">
+                  <div class="small-9 large-9 columns">
+                    <input type="text" placeholder="Enter party name">
+                  </div>
+                  <div class="small-3 large-3 columns">
+                    <a href="#" class="button postfix">Join!</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero show-for-medium-up">
+      <div class="row">
+        <div class="medium-6 large-6 columns">
+          <h1 id="logo"> <i id="music-icon" class="fa fa-music"></i> Social DJ</h1>
+        </div>
+        <div class="medium-6 large-6 columns">
+          <h3 class="header">Let the crowd choose the songs</h3>
+          <p>Join a party and start choosing the songs you want to listen</p>
+          <form id="party-search">
+            <div class="row">
+              <div class="large-12 columns">
+                <div class="row collapse postfix-round">
+                  <div class="small-9 large-9 columns">
+                    <input type="text" placeholder="Enter party name">
+                  </div>
+                  <div class="small-3 large-3 columns">
+                    <a href="#" class="button postfix">Join!</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    
+    <div id="djsignup">
+      <div class="row">
+        <div class="small-12 large-12 columns">
+          <h1 class="header-mod">Start hosting your party</h1>
+          <p>Host your own party and share it with your friend, so they can choose which song to play.</p>
+          <a href="#" data-reveal-id="signUpModal" class="radius button">Sign up</a>
+        </div>
+      </div>
+    </div>
+      
+    
+    <div id="signUpModal" class="reveal-modal" data-reveal aria-labelledby="signUpModalTitle" aria-hidden="true" role="dialog">
+      <h2 id="signUpModalTitle">Sign Up</h2>
+      <form id="signup">
+        <input type="text" size="30" placeholder="Signup with your email here" id="new-email"><br/>
+        <input type="password" size="30" placeholder="Password here" id="new-password"><br/>
+        <input type="button" id="signup-button" value="Signup"></input>
       </form>
+      <a class="close-reveal-modal" aria-label="Close">&#215;</a>
+    </div>
+
+    <div id="loginModal" class="reveal-modal" data-reveal aria-labelledby="loginModalTitle" aria-hidden="true" role="dialog">
+      <h2 id="loginModalTitle">Login</h2>
+      <form id="login">
+        <input type="text" size="30" placeholder="Login with your email here" id="email"><br/>
+        <input type="password" size="30" placeholder="Password here" id="password"><br/>
+        <input type="button" id="login-button" value="login"></input>
+      </form>
+      <a class="close-reveal-modal" aria-label="Close">&#215;</a>
+    </div>
   </body>
 
   <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+  <script src="http://cdn.foundation5.zurb.com/foundation.js"></script>
+  
+  <script>
+    $(document).foundation();
+  </script>
+
   <script src="/socket.io/socket.io.js"></script>
   <script src="/javascripts/index.js"></script>
-  <script>
-  </script>
 </html>
