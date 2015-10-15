@@ -29,54 +29,54 @@ var io = require('socket.io')(server);
 
 models.sequelize.sync().then(function () {
 
-
-  models.song.destroy({where:{}});
-  models.party.destroy({where:{}});
-  models.dj.destroy({where:{}});
+  // models.vote.destroy({where:{}});
+  // models.song.destroy({where:{}});
+  // models.party.destroy({where:{}});
+  // models.dj.destroy({where:{}});
   // Seed
-  models.dj.create({
-    name: "Tony",
-    password: "fakepassword",
-    email: "dj@email.com"
-  }).then(function(user) {
-    models.party.create({
-      name: "The Party",
-      active: true,
-      djId: user.id
-    }).then(function(party) {
+  // models.dj.create({
+  //   name: "Tony",
+  //   password: "fakepassword",
+  //   email: "dj@email.com"
+  // }).then(function(user) {
+  //   models.party.create({
+  //     name: "The Party",
+  //     active: true,
+  //     djId: user.id
+  //   }).then(function(party) {
 
-      models.song.create({
-        title: "Song 1",
-        album: "Dummy Album",
-        artist: "Dummy Artist",
-        voteCount: 1,
-        img_url: "https://upload.wikimedia.org/wikipedia/en/6/6b/Portishead_-_Dummy.png",
-        spotify_id: "abc",
-        partyId: party.id
-      });
+  //     models.song.create({
+  //       title: "Song 1",
+  //       album: "Dummy Album",
+  //       artist: "Dummy Artist",
+  //       voteCount: 1,
+  //       img_url: "https://upload.wikimedia.org/wikipedia/en/6/6b/Portishead_-_Dummy.png",
+  //       spotify_id: "abc",
+  //       partyId: party.id
+  //     });
 
-      models.song.create({
-        title: "Dummy Song",
-        album: "Dummy Album 2",
-        artist: "Dummy Artist",
-        voteCount: 1,
-        img_url: "https://upload.wikimedia.org/wikipedia/en/6/6b/Portishead_-_Dummy.png",
-        spotify_id: "abc",
-        partyId: party.id
-      });
+  //     models.song.create({
+  //       title: "Dummy Song",
+  //       album: "Dummy Album 2",
+  //       artist: "Dummy Artist",
+  //       voteCount: 1,
+  //       img_url: "https://upload.wikimedia.org/wikipedia/en/6/6b/Portishead_-_Dummy.png",
+  //       spotify_id: "abc",
+  //       partyId: party.id
+  //     });
 
-      models.song.create({
-        title: "Back to Back",
-        album: "Back to Back",
-        artist: "Drake",
-        voteCount: 1,
-        img_url: "https://theauthoritydjs.files.wordpress.com/2015/08/drake_back_2_back-front.jpg",
-        spotify_id: "spotify:track:5lFDtgWsjRJu8fPOAyJIAK",
-        partyId: party.id
-      });
+  //     models.song.create({
+  //       title: "Back to Back",
+  //       album: "Back to Back",
+  //       artist: "Drake",
+  //       voteCount: 1,
+  //       img_url: "https://theauthoritydjs.files.wordpress.com/2015/08/drake_back_2_back-front.jpg",
+  //       spotify_id: "spotify:track:5lFDtgWsjRJu8fPOAyJIAK",
+  //       partyId: party.id
+  //     });
 
-    });
-  });
+  //   });
+  // });
 
   server.listen(port, function() {
     console.log('Server listening on port ' + port + '...');
