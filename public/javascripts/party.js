@@ -38,7 +38,7 @@ $(function() {
 
   socket.on('new song', function(song) {
     var $songOption = $('#' + song.id);
-    console.log($songOption.text() === "");
+    // console.log($songOption.text() === "");
     if ($songOption.text() === ""){
       $('#songs').append('<li id="' +  song.id + '">' + '<i class="fa fa-thumbs-up" id="upvote"></i>'+ song.title + ' - VoteCount: <span>' + song.voteCount + '</span></li>');
     }
