@@ -1,4 +1,4 @@
-var email, password;
+var email, password; //TODO: global vs. local scope variable
 
 $('#login-button').click(function(event){
   event.preventDefault();
@@ -20,7 +20,7 @@ $('#signup-button').click(function(event){
   email = $('#new-email').val();
   password = $('#new-password').val();
 
-  $.post('http://localhost:3000/signup', {email: email, password: password}, function(response){
+  $.post('http://localhost:3000/signup', {email: email, password: password}, function(response){ //TODO: ES6 hint Object Shorthand
     if (response === 'done'){
       window.location.href="/parties";
     } else {

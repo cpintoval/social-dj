@@ -11,6 +11,10 @@ var routes = require('./routes/index');
 var party = require('./routes/party');
 var parties = require('./routes/parties');
 
+
+//TODO: you can abstract the 'app' functionality into a separate folder and bring it in , so var app = require('app'), etc
+
+//TODO: Where are you starting your app?
 var app = express();
 
 // view engine setup
@@ -25,6 +29,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+//TODO: You are sharing your secret data, this should be not visible/available, place in config.json
 app.use(session({
   secret: 'password',
   name: 'dj-cookie',
@@ -41,7 +46,7 @@ app.use(usersession({
 }));
 
 // Route definition
-app.use('/', routes);
+app.use('/', require('./routes/index')); //TODO: As a shortcut, you could just require the files here instead of declaring variables on line 10
 app.use('/party', party);
 app.use('/parties', parties);
 

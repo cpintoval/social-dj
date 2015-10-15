@@ -1,7 +1,7 @@
 'use strict';
 module.exports = function(sequelize, DataTypes) {
   var song = sequelize.define('song', {
-    title: DataTypes.STRING,
+    title: DataTypes.STRING, //TODO: Are these DataTypes for Sequelize.STRING ?
     album: DataTypes.STRING,
     artist: DataTypes.STRING,
     voteCount: DataTypes.INTEGER,

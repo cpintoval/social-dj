@@ -4,6 +4,7 @@ var router = express.Router();
 var session = require('express-session');
 var sess;
 var querystring = require('querystring');
+var partyHelper = require('../models/partHelper')
 
 var parties = {
   'party-1': ['Song 1', 'Song 2', 'Song 3'],
@@ -14,7 +15,9 @@ var parties = {
 router.get('/', function(request, response, next) {
   sess = request.session;
 
-  models.dj.findOne({
+  //partyHelper.findOne(params).then
+
+  models.dj.findOne({ //TODO: You notice you are mixing controller and model logic? You can abstract models logic into modelHelpers instead of having them in your routes.
     where: {
       email: sess.email
     }}).then(function(dj){
@@ -39,7 +42,7 @@ router.get('/', function(request, response, next) {
 });
 
 router.post('/', function(request, response){
-  sess = request.session;
+  sess = request.session; //TODO: declare variable locally. Ah ok, declared globally, not necessary though.
 
   models.dj.findOne({
     where: {
@@ -47,7 +50,7 @@ router.post('/', function(request, response){
     }
   }).then(function(dj){
       models.party.create({
-        name: request.body.partyName,
+        name: request.body.partyName, //TODO: Do you know how .body is being attached?
         active: true,
         djId: dj.id
       }).then(function(party){
