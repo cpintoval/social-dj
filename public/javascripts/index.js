@@ -5,7 +5,7 @@ $('#login-button').click(function(event){
   email = $('#email').val();
   password = $('#password').val();
 
-  $.post('http://localhost:3000/', {email: email, password: password}, function(response){
+  $.post('/', {email: email, password: password}, function(response){
     if (response === 'done'){
       window.location.href="/parties";
     } else {
@@ -20,7 +20,7 @@ $('#signup-button').click(function(event){
   email = $('#new-email').val();
   password = $('#new-password').val();
 
-  $.post('http://localhost:3000/signup', {email: email, password: password}, function(response){
+  $.post('/signup', {email: email, password: password}, function(response){
     if (response === 'done'){
       window.location.href="/parties";
     } else {

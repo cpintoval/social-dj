@@ -3,10 +3,10 @@ var newName;
 $('#newparty-button').click(function(event){
   event.preventDefault();
   newName = $('#new-party').val();
-
+  
   if(newName !== ''){
 
-    $.post('http://localhost:3000/parties', {partyName: newName}, function(response){
+    $.post('/parties', {partyName: newName}, function(response){
       console.log(response);
       if (response){
         console.log(response);
