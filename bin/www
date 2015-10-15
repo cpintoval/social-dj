@@ -93,7 +93,6 @@ models.sequelize.sync().then(function () {
     });
 
     socket.on('new song', function(obj) {
-      var nsp = io.of('/' + obj.party);
       if(obj.song){
         // console.log(obj);
         models.song.findAll({
@@ -113,19 +112,19 @@ models.sequelize.sync().then(function () {
               partyId: obj.party
             }).then(function(song) {
               
-              nsp.emit('new song', song);
+              io.emit('new song', song);
             });
           }
           else {
             // Vote for the song
             var song = response[0];
             song.increment('voteCount').then(function(resp) {
-              nsp.emit('new song', song);
+              io.emit('new song', song);
             });
           }
         });
       } else {
-        nsp.emit('error');
+        io.emit('error');
       }
     });
 

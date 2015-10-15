@@ -37,16 +37,21 @@ $(function() {
   });
 
   socket.on('new song', function(song) {
+    var currentPartyId = $('#party-name').attr('data');
     var $songOption = $('#' + song.id);
+    console.log(song.partyId);
     // console.log($songOption.text() === "");
-    if ($songOption.text() === ""){
-      $('#songs').append('<li id="' +  song.id + '">' + '<i class="fa fa-thumbs-up" id="upvote"></i>'+ song.title + ' - VoteCount: <span>' + song.voteCount + '</span></li>');
+    if (song.partyId == currentPartyId){
+      console.log('THEREEREERE')
+      if ($songOption.text() === ""){
+        $('#songs').append('<li id="' +  song.id + '">' + '<i class="fa fa-thumbs-up" id="upvote"></i>'+ song.title + '  VoteCount: <span>' + song.voteCount + '</span></li>');
+      }
+      else {
+        $songOption.find('span').text(song.voteCount);
+      }
     }
-    else {
-      $songOption.find('span').text(song.voteCount);
-    }
-    // $('#songs').append($('<li>').text(song.title + ' - VoteCount: ' + song.voteCount).attr('id', song.id));
   });
+
   socket.on('new vote',function(song){
     var $songToIncrement = $('#' + song.id);
     if ($songToIncrement.text() === ""){
