@@ -1,71 +1,62 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title><%= title %></title>
     <link rel='stylesheet' href='http://cdn.foundation5.zurb.com/foundation.css' />
+    <link href='https://fonts.googleapis.com/css?family=Nunito:400,700,300' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
     <link rel='stylesheet' href='/stylesheets/style.css' />
-    <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400italic,700,700italic' rel='stylesheet' type='text/css'>
   </head>
   <body>
 
-    <nav class="top-bar" data-topbar>
-      <ul class="title-area">
-         
-        <li class="name">
-          <h1>
-            <a href="#">
-              Social DJ
-            </a>
-          </h1>
-        </li>
-        <li class="toggle-topbar menu-icon"><a href="#"><span>menu</span></a></li>
-      </ul>
-   
-      <section class="top-bar-section">
-         
-        <ul class="right">
-          <li class="divider"></li>
-          <li class="has-dropdown">
-            <a href="#">Main Item 1</a>
-            <ul class="dropdown">
-              <li><label>Section Name</label></li>
-              <li class="has-dropdown">
-                <a href="#" class="">Has Dropdown, Level 1</a>
-                <ul class="dropdown">
-                  <li><a href="#">Dropdown Options</a></li>
-                  <li><a href="#">Dropdown Options</a></li>
-                  <li><a href="#">Level 2</a></li>
-                  <li><a href="#">Subdropdown Option</a></li>
-                  <li><a href="#">Subdropdown Option</a></li>
-                  <li><a href="#">Subdropdown Option</a></li>
-                </ul>
-              </li>
-              <li><a href="#">Dropdown Option</a></li>
-              <li><a href="#">Dropdown Option</a></li>
+    <nav id="navbar" class="top-bar" data-topbar>
+          <ul class="title-area">
+             
+            <li class="name">
+              <h1>
+                <a href="#">
+                  <i class="fa fa-music"></i>
+                  <span id="logo-navbar">Social DJ</span>
+                </a>
+              </h1>
+            </li>
+            <li class="toggle-topbar menu-icon"><a href="#"><span>menu</span></a></li>
+          </ul>
+
+          <section class="top-bar-section">
+            <ul class="right">
               <li class="divider"></li>
-              <li><label>Section Name</label></li>
-              <li><a href="#">Dropdown Option</a></li>
-              <li><a href="#">Dropdown Option</a></li>
-              <li><a href="#">Dropdown Option</a></li>
-              <li class="divider"></li>
-              <li><a href="#">See all →</a></li>
+              <li><a href="#">Login</a></li>
             </ul>
-          </li>
-          <li class="divider"></li>
-          <li><a href="#">Log In</a></li>
-        </ul>
-      </section>
-    </nav>
+          </section>
+        </nav>
     
     <div class="hero">
       <div class="row">
-        <div class="large-12 columns">
-          <h1>Let the people to choose the songs</h1>
+        <div class="small-12 large-12 columns">
+          <h1 class="header">Let the crowd choose the songs</h1>
+          <p>Host your own party and share it with your friend, so they can choose which song to play.</p>
+          <form id="party-search">
+            <div class="row">
+              <div class="large-12 columns">
+                <div class="row collapse postfix-round">
+                  <div class="small-9 large-9 columns">
+                    <input type="text" placeholder="Enter party name">
+                  </div>
+                  <div class="small-3 large-3 columns">
+                    <a href="#" class="button postfix">Join!</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </form>
         </div>
       </div>
     </div>
 
-    <h1><%= title %></h1>
+    <h1 class="header"><%= title %></h1>
     <p>Welcome to <%= title %></p>
 
     <!-- <div class="row">
@@ -88,6 +79,11 @@
 
   <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
   <script src="http://cdn.foundation5.zurb.com/foundation.js"></script>
+  
+  <script>
+    $(document).foundation();
+  </script>
+
   <script>
 
   $(document).ready(function(){

@@ -1,7 +1,28 @@
 body {
-  font-family: 'Source Sans Pro', sans-serif;
+  font-family: 'Nunito', sans-serif;
+  color: white;
 }
 
 .hero {
-  background: url('/images/orange-banner.png');
+  background: url('http://images2.alphacoders.com/701/70172.jpg');
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: center;
+  padding: 14%;
+  text-align: center;
+}
+
+.header {
+  font-family: 'Nunito', sans-serif;
+  color: white;
+}
+
+#party-search {
+  text-align: center;
+  height: 
+}
+
+#navbar, .divider, .dropdown {
+  font-family: 'Nunito', sans-serif;
+  background: #ff6600 !important;
 }
