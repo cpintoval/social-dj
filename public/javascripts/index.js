@@ -27,4 +27,14 @@ $('#signup-button').click(function(event){
       alert(response.message);
     }
   })
-})
+});
+
+$('#partysearch-button').click(function(event){
+  event.preventDefault();
+  var goToPartyName = $('#party-input').val();
+
+  $.post('/goto', {partyName: goToPartyName}, function(response){
+
+    window.location.href="/parties/" + response.id;
+  });
+});

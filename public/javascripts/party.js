@@ -184,6 +184,14 @@ myApp.buildWeatherHTML = function () {
     });
   });
 
+  $('ul').on("click","#delete",function(){
+    console.log("delete button");
+    socket.emit('delete song',{
+      song: $(this).parent().attr('id'),
+      party: $('#party-name').attr('data')
+    });
+  });
+
   $('form').on('keypress','#song',function(song){
     var $song_input =$('#song').val();
     if ($song_input.length > 4){
@@ -202,9 +210,9 @@ myApp.buildWeatherHTML = function () {
     console.log(song.partyId);
     // console.log($songOption.text() === "");
     if (song.partyId == currentPartyId){
-      console.log('THEREEREERE')
+      console.log('THEREEREERE');
       if ($songOption.text() === ""){
-        $('#songs').append('<li id="' +  song.id + '">' + '<i class="fa fa-thumbs-up" id="upvote"></i>'+ song.title + '  VoteCount: <span>' + song.voteCount + '</span></li>');
+        $('#songs').append('<li id="' +  song.id + '">' + '<i class="fa fa-thumbs-up" id="upvote"></i>'+ song.title + '  VoteCount: <span>' + song.voteCount + '</span>'+'<i class="fa fa-trash-o" id="delete"></i>'+'</li>');
       }
       else {
         $songOption.find('span').text(song.voteCount);
@@ -219,6 +227,10 @@ myApp.buildWeatherHTML = function () {
     }else{
       $songToIncrement.find('span').text(song.voteCount);
     }
+  });
+
+  socket.on('deleted song',function(obj){
+    $('#' + obj.song).remove();
   });
 
   //for error handing in the song input

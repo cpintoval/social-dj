@@ -3,7 +3,7 @@ var newName;
 $('#newparty-button').click(function(event){
   event.preventDefault();
   newName = $('#new-party').val();
-  
+
   if(newName !== ''){
 
     $.post('/parties', {partyName: newName}, function(response){
@@ -19,3 +19,10 @@ $('#newparty-button').click(function(event){
     alert('Party name cannot be empty!');
   }
 })
+
+$('#delete').on('click',function(){
+
+  $.post('/parties/delete',{partyid: $(this).attr("data")},function(response){
+    console.log("responded")
+  });
+});

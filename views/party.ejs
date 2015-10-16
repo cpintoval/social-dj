@@ -38,6 +38,7 @@
         </div>
       </div>
     </div>
+
     <!-- Search popup-->
     <div class="popup">
       <div class="view navbar-fixed">
@@ -100,6 +101,6 @@
 </div>
 <ul id='songs'>
   <% for(var i = 0; i < songs.length; i++) { %>
-  <li id=<%= songs[i].id %>><i class="fa fa-thumbs-up" id="upvote" ></i><%= songs[i].title %><span> VoteCount: <%=songs[i].voteCount%></span></li>
+  <li id=<%= songs[i].id %>><i class="fa fa-thumbs-up" id="upvote" ></i><%= songs[i].title %><span> VoteCount: <%=songs[i].voteCount%></span><i class="fa fa-trash-o" id="delete"></i></li>
   <% } %>
 </ul> -->
