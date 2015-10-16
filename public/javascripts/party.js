@@ -22,19 +22,23 @@ $(function() {
     $('.popup .preloader').show();
     searchTimeout = setTimeout(function () {
     $.ajax({
-      url: 'http://ws.spotify.com/search/1/track.json?q='+search
-      }).success(function(response){
+      url: 'https://api.spotify.com/v1/search',
+      data: {
+        q: search,
+        type: 'track'
+      },
+      success: function(response){
+        console.log(response.tracks.items);
         var html = '';
-          console.log(response);
           $('.popup .preloader').hide();
-          if (response.tracks.length > 0) {
-              var songs = response.tracks;
+          if (response.tracks.items.length > 0) {
+              var songs = response.tracks.items;
               console.log("hello there",songs);
               html = myApp.searchResultsTemplate(songs);
           }
           $('.popup .search-results').html(html);
         }
-    );
+    });
     }, 300);
   };
 

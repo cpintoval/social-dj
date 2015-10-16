@@ -63,7 +63,7 @@
     <!-- Templates-->
     <script id="search-results-template" type="text/template">
       {{#each this}}
-      <li data-href="{{href}}" data-name="{{name}}" data-artist="{{artists[0].name}}" class="close-popup">{{name}} <span>by : {{artists[0].name}}</span></li>{{/if}}{{/if}}
+      <li data-href="{{href}}" data-preview="{{preview_url}}" data-name="{{name}}" data-artist="{{artists[0].name}}" class="close-popup">{{name}} <span>by : {{artists[0].name}}</span></li>{{/if}}{{/if}}
       {{/each}}
     </script>
     <script id="home-items-template" type="text/template">{{#each this}}
