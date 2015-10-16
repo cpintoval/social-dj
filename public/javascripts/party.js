@@ -23,7 +23,7 @@ $(function() {
       searchTimeout = setTimeout(function () {
           $.getJSON(q, function (results) {
               var html = '';
-              
+              console.log(results);
               $('.popup .preloader').hide();
               if (results.query.count > 0) {
                   var places = results.query.results.place;
@@ -33,6 +33,83 @@ $(function() {
           });
       }, 300);
   };
+
+  // Get locations weather data
+  myApp.updateWeatherData = function (callback) {
+    var woeids = [];
+    if (!localStorage.w7Places) return;
+    var places = $.parseJSON(localStorage.w7Places);
+    if (places.length === 0) {
+        localStorage.w7Data = JSON.stringify([]);
+        return;
+    }
+    if (!navigator.onLine) {
+        myApp.alert('You need internet connection to search for songs');
+    }
+    for (var i = 0; i < places.length; i++) {
+        woeids.push(places[i].woeid);
+    }
+    var query = encodeURIComponent('select * from weather.forecast where woeid in (' + JSON.stringify(woeids).replace('[', '').replace(']', '') + ') and u="c"');
+    var q = 'http://query.yahooapis.com/v1/public/yql?q=' + query + '&format=json';
+    myApp.showIndicator();
+    $.get(q, function (data) {
+      var weatherData = [];
+      myApp.hideIndicator();
+      data = $.parseJSON(data);
+      if (!data.query || !data.query.results) return;
+      var places = data.query.results.channel;
+      var place;
+      if ($.isArray(places)) {
+          for (var i = 0; i < places.length; i++) {
+              place = places[i];
+              weatherData.push({
+                  city: place.location.city,
+                  country: place.location.country,
+                  region: place.location.region,
+                  humidity: place.atmosphere.humidity,
+                  pressure: place.atmosphere.pressure,
+                  sunrise: place.astronomy.sunrise,
+                  sunset: place.astronomy.sunset,
+                  wind: place.wind,
+                  condition: place.item.condition,
+                  forecast: place.item.forecast,
+                  lat: place.item.lat,
+                  long: place.item.long,
+                  woeid: woeids[i]
+              });
+          }
+      }
+      else {
+          place = places;
+          weatherData.push({
+              city: place.location.city,
+              country: place.location.country,
+              region: place.location.region,
+              humidity: place.atmosphere.humidity,
+              pressure: place.atmosphere.pressure,
+              sunrise: place.astronomy.sunrise,
+              sunset: place.astronomy.sunset,
+              wind: place.wind,
+              condition: place.item.condition,
+              forecast: place.item.forecast,
+              lat: place.item.lat,
+              long: place.item.long,
+              woeid: woeids[0]
+          });
+      }
+      localStorage.w7Data = JSON.stringify(weatherData);
+      if (callback) callback();
+  });
+};
+// Build list of places on home page
+myApp.buildWeatherHTML = function () {
+    var weatherData = localStorage.w7Data;
+    if (!weatherData) return;
+    $('.places-list ul').html('');
+    weatherData = $.parseJSON(weatherData);
+    var html = myApp.homeItemsTemplate(weatherData);
+    $('.places-list ul').html(html);
+};
 
   // Handle search results
   $('.popup input[type="text"]').on('change keyup keydown', function () {
@@ -55,6 +132,30 @@ $(function() {
       $('.views').removeClass('blured');
       $('.popup input[type="text"]')[0].blur();
       $('.statusbar-overlay').removeClass('with-popup-opened');
+  });
+  $('.popup .search-results').on('click', 'li', function () {
+    var li = $(this);
+    var woeid = li.attr('data-woeid');
+    var city = li.attr('data-city');
+    var country = li.attr('data-country');
+    var places;
+    if (localStorage.w7Places) places = $.parseJSON(localStorage.w7Places);
+    else places = [];
+    places.push({
+        woeid: li.attr('data-woeid'),
+        city: li.attr('data-city'),
+        country: li.attr('data-country')
+    });
+    localStorage.w7Places = JSON.stringify(places);
+    myApp.updateWeatherData(function () {
+        myApp.buildWeatherHTML();
+    });
+  });
+
+  // Update html and weather data on app load
+  myApp.buildWeatherHTML();
+  myApp.updateWeatherData(function () {
+      myApp.buildWeatherHTML();
   });
 
   // Sockets and jQuery
