@@ -16,22 +16,26 @@ $(function() {
   // Search Songs
   var searchTimeout;
   myApp.searchLocation = function (search) {
-      var query = encodeURIComponent('select * from geo.places where text="' + search + '"');
-      var q = 'http://query.yahooapis.com/v1/public/yql?q=' + query + '&format=json';
-      if (searchTimeout) clearTimeout(searchTimeout);
-      $('.popup .preloader').show();
-      searchTimeout = setTimeout(function () {
-          $.getJSON(q, function (results) {
-              var html = '';
-              console.log(results);
-              $('.popup .preloader').hide();
-              if (results.query.count > 0) {
-                  var places = results.query.results.place;
-                  html = myApp.searchResultsTemplate(places);
-              }
-              $('.popup .search-results').html(html);
-          });
-      }, 300);
+    // var query = encodeURIComponent('select * from geo.places where text="' + search + '"');
+    // var q = 'http://query.yahooapis.com/v1/public/yql?q=' + query + '&format=json';
+    if (searchTimeout) clearTimeout(searchTimeout);
+    $('.popup .preloader').show();
+    searchTimeout = setTimeout(function () {
+    $.ajax({
+      url: 'http://ws.spotify.com/search/1/track.json?q='+search
+      }).success(function(response){
+        var html = '';
+          console.log(response);
+          $('.popup .preloader').hide();
+          if (response.tracks.length > 0) {
+              var songs = response.tracks;
+              console.log("hello there",songs);
+              html = myApp.searchResultsTemplate(songs);
+          }
+          $('.popup .search-results').html(html);
+        }
+    );
+    }, 300);
   };
 
   // Get locations weather data
