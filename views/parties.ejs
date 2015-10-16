@@ -2,16 +2,17 @@
 <html>
   <head>
     <title>Party List</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
     <link rel='stylesheet' href='/stylesheets/style.css' />
   </head>
   <body>
 
-    <p>Hello, <%= email %>. Welcome back! Your password is <%= password %></p><br/><br/> 
+    <p>Hello, <%= email %>. Welcome back! Your password is <%= password %></p><br/><br/>
     <h1>Party List</h1>
     <ul id='created-parties'>
       <% for(var i = 0; i < parties.length; i++) { %>
         <% if(parties[i].dataValues.active === true){ %>
-        <li><a href=<%= '/parties/' + parties[i].dataValues.id %>><%= parties[i].dataValues.name %></a></li>
+        <li><a href=<%= '/parties/' + parties[i].dataValues.id %>><%= parties[i].dataValues.name %></a><i class="fa fa-archive" id="delete" data=<%=parties[i].dataValues.id%>></i></li>
         <% } %>
       <% } %>
 
@@ -33,7 +34,7 @@
     </form>
 
     <a href="/logout">Logout</a>
-    
+
     <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
     <script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
     <script src="/socket.io/socket.io.js"></script>

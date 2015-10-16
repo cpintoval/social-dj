@@ -91,4 +91,17 @@ router.get('/:id', function(request, response) {
   // });
 });
 
+router.post('/delete',function(request,response){
+  var partyId = request.body.partyid;
+  models.party.update({
+    active: false,
+    }, {
+    where: {
+      id: partyId
+    }
+  }).then(function(data){
+    response.send(data);
+  });
+});
+
 module.exports = router;
