@@ -26,6 +26,18 @@ router.get('/logout', function(request, response){
   });
 });
 
+router.post('/goto', function(request, response){
+
+  models.party.findOne({
+    where: {
+      name: request.body.partyName
+    }
+  }).then(function(goToParty){
+    console.log(goToParty);
+    response.send(goToParty);
+  });
+});
+
 router.post('/', function(request,response){
   sess = request.session;
 
