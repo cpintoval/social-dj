@@ -1,17 +1,14 @@
-var newName;
-
 $('#newparty-button').click(function(event){
   event.preventDefault();
-  newName = $('#new-party').val();
+  var newName = $('#new-party').val();
 
   if(newName !== ''){
 
     $.post('/parties', {partyName: newName}, function(response){
-      console.log(response);
       if (response){
-        console.log(response);
         $('#new-party').val('');
-        $('#created-parties').append('<li><a href="/parties/' + response.id + '">' + response.name + '</a></li>');
+        $('#created-parties').append('<li><a href="/parties/' + response.id + '">' + response.name + '</a><i class="fa fa-archive" id="delete" data="' + response.id + '"></i></li>');
+        window.location.href="/parties";
 
       }
     })
@@ -23,6 +20,8 @@ $('#newparty-button').click(function(event){
 $('#delete').on('click',function(){
 
   $.post('/parties/delete',{partyid: $(this).attr("data")},function(response){
-    console.log("responded")
+    if (response === "archieved"){
+      window.location.href="/parties";
+    }
   });
 });
