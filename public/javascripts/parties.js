@@ -7,7 +7,7 @@ $('#newparty-button').click(function(event){
     $.post('/parties', {partyName: newName}, function(response){
       if (response){
         $('#new-party').val('');
-        $('#created-parties').append('<li><a href="/parties/' + response.id + '">' + response.name + '</a><i class="fa fa-archive" id="delete" data="' + response.id + '"></i></li>');
+        $('#created-parties').append('<li><a href="/parties/' + response.id + '">' + response.name + '</a><i class="fa fa-archive" id="archive" data="' + response.id + '"></i></li>');
         window.location.href="/parties";
 
       }
@@ -17,11 +17,30 @@ $('#newparty-button').click(function(event){
   }
 })
 
-$('#delete').on('click',function(){
+$('.newparties > li > i').on('click',function(){
 
-  $.post('/parties/delete',{partyid: $(this).attr("data")},function(response){
-    if (response === "archieved"){
-      window.location.href="/parties";
+  var $thatParty = $(this).parent();
+
+  $.post('/parties/archive',{partyid: $(this).attr("data")},function(response){
+
+    console.log(response);
+
+    var $newListItem = $thatParty.empty().append('<li><a href="/parties/' + response.id + '">' + response.name + '</a><i class="fa fa-trash-o" id="remove" data="' + response.id + '"></i></li>');
+
+    if (response){
+      $thatParty.remove();
+      $('.oldparties').append($newListItem);
+    }
+  });
+});
+
+$('.oldparties > li > i').on('click',function(){
+
+  var $thisParty = $(this).parent();
+
+  $.post('/parties/remove',{partyid: $(this).attr("data")},function(response){
+    if (response === "removed"){
+      $thisParty.remove();
     }
   });
 });

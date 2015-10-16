@@ -9,20 +9,20 @@
 
     <p>Hello, <%= email %>. Welcome back! Your password is <%= password %></p><br/><br/>
     <h1>Party List</h1>
-    <ul id='created-parties'>
+    <ul class='newparties'>
       <% for(var i = 0; i < parties.length; i++) { %>
         <% if(parties[i].dataValues.active === true){ %>
-        <li><a href=<%= '/parties/' + parties[i].dataValues.id %>><%= parties[i].dataValues.name %></a><i class="fa fa-archive" id="delete" data=<%=parties[i].dataValues.id%>></i></li>
+        <li><a href=<%= '/parties/' + parties[i].dataValues.id %>><%= parties[i].dataValues.name %></a><i class="fa fa-archive" id="archive" data=<%=parties[i].dataValues.id%>></i></li>
         <% } %>
       <% } %>
 
     </ul>
 
     <h2>Old Party List</h2>
-    <ul id='parties'>
+    <ul class='oldparties'>
       <% for(var i = 0; i < parties.length; i++) { %>
         <% if(parties[i].dataValues.active === false){ %>
-        <li><a href=<%= '/parties/' + parties[i].dataValues.id %>><%= parties[i].dataValues.name %></a></li>
+        <li><a href=<%= '/parties/' + parties[i].dataValues.id %>><%= parties[i].dataValues.name %></a><i class="fa fa-trash-o" id="remove" data=<%=parties[i].dataValues.id%>></i></li>
         <% } %>
       <% } %>
 
