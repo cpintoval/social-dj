@@ -18,9 +18,14 @@ body {
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-position: center;
-  padding: 13%;
+  padding-bottom: 15%;
+  padding-top: 9%;
   text-align: center;
   color: white;
+}
+
+#right-col {
+  padding-top: 6%;
 }
 
 .header {
@@ -41,14 +46,18 @@ body {
 }
 
 #navbar {
-  font-family: 'Roboto', sans-serif !important;
-  background: #ff6600 !important;
+  font-family: 'Roboto', sans-serif;
+  background: #ff6600;
+}
+
+.top-bar-section li:not(.has-form) a:not(.button) {
+  background: #ff6600;
 }
 
 #logo {
   font-weight: 100;
   color: white;
-  font-size: 5em;
+  font-size: 4em;
 }
 
 #logo-mobile {
@@ -65,6 +74,6 @@ body {
   font-weight: 100;
 }
 
-#djsignup {
-  padding: 10%;
+#party-input, #bigparty-input {
+  padding-left: 20px;
 }
