@@ -1,7 +1,7 @@
 body {
   font-family: 'Roboto', sans-serif;
   font-weight: 100;
-  background-color: black;
+  background-color: #2a303c;
 }
 
 .hero-mobile {
@@ -95,8 +95,6 @@ body {
 #profile-picture {
   height: 120px;
   width: 120px;
-  background-color: #262626;
-  border-radius: 50%;
 }
 
 #party-item {
