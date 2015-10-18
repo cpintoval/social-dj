@@ -111,7 +111,7 @@ models.sequelize.sync().then(function () {
               spotify_id: obj.song.id,
               partyId: obj.partyId
             }).then(function(song) {
-              io.emit('new song', song);
+              io.emit('new songed', song);
             });
           }
           else {
@@ -151,7 +151,7 @@ models.sequelize.sync().then(function () {
           }).then(function(response){
             var song = response[0];
             song.increment('voteCount').then(function(res){
-            io.emit('new vote',res);
+            io.emit('new voted',res);
             });
           });
         } else{
@@ -175,6 +175,7 @@ models.sequelize.sync().then(function () {
             partyId: obj.party
           }
         }).then(function(data){
+          console.log("sending deleted socket");
           io.emit('deleted song',obj);
         });
       });

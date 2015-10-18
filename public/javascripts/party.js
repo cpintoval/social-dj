@@ -148,21 +148,21 @@ myApp.buildWeatherHTML = function () {
       song: songData,
       partyId: $('#party-name').attr('data')
     });
-    var woeid = li.attr('data-woeid');
-    var city = li.attr('data-city');
-    var country = li.attr('data-country');
-    var places;
-    if (localStorage.w7Places) places = $.parseJSON(localStorage.w7Places);
-    else places = [];
-    places.push({
-        woeid: li.attr('data-woeid'),
-        city: li.attr('data-city'),
-        country: li.attr('data-country')
-    });
-    localStorage.w7Places = JSON.stringify(places);
-    myApp.updateWeatherData(function () {
-        myApp.buildWeatherHTML();
-    });
+    // var woeid = li.attr('data-woeid');
+    // var city = li.attr('data-city');
+    // var country = li.attr('data-country');
+    // var places;
+    // if (localStorage.w7Places) places = $.parseJSON(localStorage.w7Places);
+    // else places = [];
+    // places.push({
+    //     woeid: li.attr('data-woeid'),
+    //     city: li.attr('data-city'),
+    //     country: li.attr('data-country')
+    // });
+    // localStorage.w7Places = JSON.stringify(places);
+    // myApp.updateWeatherData(function () {
+    //     myApp.buildWeatherHTML();
+    // });
   });
 
   // Update html and weather data on app load
@@ -189,18 +189,18 @@ myApp.buildWeatherHTML = function () {
   });
 
   $('ul').on("click",'#upvote',function(){
-    console.log('first click');
+    console.log('upvote',$(this).parent().parent().find(".city").attr('id'));
     socket.emit('new vote',{
-      song: $(this).parent().attr('id'),
+      song: $(this).parent().parent().find(".city").attr('id'),
       party: $('#party-name').attr('data'),
       cookie: x
     });
   });
 
   $('ul').on("click","#delete",function(){
-    console.log("delete button");
+    console.log("delete button",$(this).parent());
     socket.emit('delete song',{
-      song: $(this).parent().attr('id'),
+      song: $(this).parent(".city").attr('id'),
       party: $('#party-name').attr('data')
     });
   });
@@ -217,33 +217,56 @@ myApp.buildWeatherHTML = function () {
     }
   });
 
-  socket.on('new song', function(song) {
+  socket.on('new songed', function(song) {
+    html = myApp.buildWeatherHTML(song);
     var currentPartyId = $('#party-name').attr('data');
     var $songOption = $('#' + song.id);
+
+    var $newli = $( "<li class='swipeout'>test</li>" );
+
     console.log(song.partyId);
     // console.log($songOption.text() === "");
     if (song.partyId == currentPartyId){
       console.log('THEREEREERE');
       if ($songOption.text() === ""){
-        $('#songs').append('<li id="' +  song.id + '">' + '<i class="fa fa-thumbs-up" id="upvote"></i>'+ song.title + '  VoteCount: <span>' + song.voteCount + '</span>'+'<i class="fa fa-trash-o" id="delete"></i>'+'</li>');
+        // $('ul').append('<li id="' +  song.id + '">' + '<i class="fa fa-thumbs-up" id="upvote"></i>'+ song.title + '  VoteCount: <span>' + song.voteCount + '</span>'+'<i class="fa fa-trash-o" id="delete"></i>'+'</li>');
+        $('ul').append("\
+          <li class='swipeout'>\
+            <div class='swipeout-content'>\
+              <div class='item-inner'>\
+                <div class='item-title'>\
+                  <div class='city' id="+song.id+">"+song.title+"<i class='fa fa-trash-o' id='delete'></i>\
+                  </div>\
+                  <div class='country'>"+song.artist+"\
+                  </div>\
+                </div>\
+                <div class='item-after'><span id='upvoted'>"+song.voteCount+"</span><i class='fa fa-thumbs-up' id='upvote' ></i></div>\
+              </div>\
+            </div>\
+            <div class='swipeout-actions-right'><a href='#'' class='swipeout-delete'>Delete</a></div>\
+          </li>\
+        ");
       }
       else {
-        $songOption.find('span').text(song.voteCount);
+      $songToIncrement.parent().parent().find('#upvoted').text(song.voteCount);
       }
     }
   });
 
-  socket.on('new vote',function(song){
+  socket.on('new voted',function(song){
     var $songToIncrement = $('#' + song.id);
+    console.log($songToIncrement);
     if ($songToIncrement.text() === ""){
+      console.log("inside if statement");
       $('#songs').append("VoteCount: <span>" + song.voteCount + "</span></li>");
     }else{
-      $songToIncrement.find('span').text(song.voteCount);
+      $songToIncrement.parent().parent().find('#upvoted').text(song.voteCount);
     }
   });
 
   socket.on('deleted song',function(obj){
-    $('#' + obj.song).remove();
+    console.log('deleted song');
+    $('#' + obj.song).parent().parent().parent().parent().remove();
   });
 
   //for error handing in the song input
