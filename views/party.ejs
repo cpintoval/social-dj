@@ -30,7 +30,21 @@
           <div data-page="index" class="page">
             <div class="page-content">
               <div class="list-block places-list">
-                <ul></ul>
+                <ul>
+                <% for(var i = 0; i < songs.length; i++) { %>
+                <li data-woeid="{{woeid}}" class="swipeout">
+                      <div class="swipeout-content"><a href="#" data-woeid="{{woeid}}" class="item-content item-link">
+                          <div class="item-inner">
+                            <div class="item-title">
+                              <div class="city" id= <%= songs[i].id %> > <%=songs[i].title%><i class="fa fa-trash-o" id="delete"></i></div>
+                              <div class="country"><%= songs[i].artist %></div>
+                            </div>
+                            <div class="item-after"><span> UpVotes: <%=songs[i].voteCount%> </span><i class="fa fa-thumbs-up" id="upvote" ></i></div>
+                          </div></a></div>
+                      <div class="swipeout-actions-right"><a href="#" class="swipeout-delete">Delete</a></div>
+                </li>
+                <% } %>
+                </ul>
                 <!-- <div class="list-block-label"><img src="img/yahoo-logo.png" height="20"></div> -->
               </div>
             </div>
@@ -63,7 +77,7 @@
     <!-- Templates-->
     <script id="search-results-template" type="text/template">
       {{#each this}}
-      <li data-href="{{href}}" data-preview="{{preview_url}}" data-name="{{name}}" data-artist="{{artists[0].name}}" class="close-popup">{{name}} <span>by : {{artists[0].name}}</span></li>{{/if}}{{/if}}
+      <li data-id="{{id}}" data-preview="{{preview_url}}" data-album="{{album.name}}" data-name="{{name}}" data-artist="{{artists[0].name}}" class="close-popup">{{name}} <span>by : {{artists[0].name}} \\\\ Album: From Album: {{album.name}}</span></li>{{/if}}{{/if}}
       {{/each}}
     </script>
     <script id="home-items-template" type="text/template">{{#each this}}
@@ -72,6 +86,7 @@
             <div class="item-inner">
               <div class="item-title">
                 <div class="city">{{city}}</div>
+                <div class="city"><%= songs[0].title %></div>
                 <div class="country">{{country}}</div>
               </div>
               <div class="item-after">{{condition.temp}}&deg;</div>
@@ -90,14 +105,9 @@
 </html>
 
 
-<!-- <h1 id="party-name" data=<%= party.id %>><%= party.name %> Now Trending</h1>
-<div>
-  <form>
-    <input type="text" id='song' list="matching-songs" name='song' placeholder='Enter a song...'>
-    <datalist id="matching-songs"></datalist>
-    <input type="submit">
-  </form>
-</div>
+<h1 id="party-name" data=<%= party.id %>><%= party.name %> Now Trending</h1>
+
+<%console.log(songs, "this is in the ejs")%>
 <ul id='songs'>
   <% for(var i = 0; i < songs.length; i++) { %>
   <li id=<%= songs[i].id %>><i class="fa fa-thumbs-up" id="upvote" ></i><%= songs[i].title %><span> VoteCount: <%=songs[i].voteCount%></span><i class="fa fa-trash-o" id="delete"></i></li>

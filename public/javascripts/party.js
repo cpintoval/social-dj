@@ -142,7 +142,12 @@ myApp.buildWeatherHTML = function () {
       $('.statusbar-overlay').removeClass('with-popup-opened');
   });
   $('.popup .search-results').on('click', 'li', function () {
-    var li = $(this);
+    // var songData = $(this)[0].dataset;
+    var songData = $(this)[0].dataset;
+    socket.emit('new song', {
+      song: songData,
+      partyId: $('#party-name').attr('data')
+    });
     var woeid = li.attr('data-woeid');
     var city = li.attr('data-city');
     var country = li.attr('data-country');

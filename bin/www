@@ -97,21 +97,20 @@ models.sequelize.sync().then(function () {
         // console.log(obj);
         models.song.findAll({
           where: {
-            spotify_id: obj.song.href,
+            spotify_id: obj.song.id,
             partyId: obj.party
           }
         }).then(function(response) {
           if (response.length === 0) {
             models.song.create({
               title: obj.song.name,
-              album: obj.song.album.name,
-              artist: obj.song.artists[0].name,
+              album: obj.song.album,
+              artist: obj.song.artist,
               voteCount: 0,
               img_url: "",
-              spotify_id: obj.song.href,
-              partyId: obj.party
+              spotify_id: obj.song.id,
+              partyId: obj.partyId
             }).then(function(song) {
-
               io.emit('new song', song);
             });
           }
