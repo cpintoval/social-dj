@@ -35,6 +35,13 @@ body {
   color: white;
 }
 
+.header-dj {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 100;
+  color: white;
+  border-bottom: 2px solid white;
+}
+
 .header-mobile {
   font-family: 'Roboto', sans-serif;
   font-weight: 100;
@@ -80,7 +87,6 @@ body {
 }
 
 #profile {
-  background-color: #262626;
   width: 100%;
   text-align: center;
   padding: 2%;
@@ -89,12 +95,20 @@ body {
 #profile-picture {
   height: 120px;
   width: 120px;
+  background-color: #262626;
+  border-radius: 50%;
 }
 
 #party-item {
-  height: 70px;
-  width: 70px;
+  height: 40px;
+  width: 120px;
   background: #ff6600;
   color: white;
   text-align: center;
+  border-radius: 20px;
+  padding: 5px;
+}
+
+#party-item > a {
+  color: white;
 }
