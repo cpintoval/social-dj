@@ -17,7 +17,7 @@ $('#newparty-button').click(function(event){
   }
 })
 
-$('.newparties > li > i').on('click',function(){
+$('#archive').on('click',function(){
 
   var $thatParty = $(this).parent();
 
@@ -25,16 +25,16 @@ $('.newparties > li > i').on('click',function(){
 
     console.log(response);
 
-    var $newListItem = $thatParty.empty().append('<li><a href="/parties/' + response.id + '">' + response.name + '</a><i class="fa fa-trash-o" id="remove" data="' + response.id + '"></i></li>');
+    var $newListItem = $thatParty.empty().append('<div id="party-item"><a href="/parties/' + response.id + '">' + response.name + '</a><i class="fa fa-trash-o" id="remove" data="' + response.id + '"></i></div>');
 
     if (response){
       $thatParty.remove();
-      $('.oldparties').append($newListItem);
+      $('#past').append($newListItem);
     }
   });
 });
 
-$('.oldparties > li > i').on('click',function(){
+$('#remove').on('click',function(){
 
   var $thisParty = $(this).parent();
 
