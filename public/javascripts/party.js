@@ -233,7 +233,7 @@ myApp.buildWeatherHTML = function () {
             <div class='swipeout-content'><a class='item-content item-link'>\
               <div class='item-inner'>\
                 <div class='item-title'>\
-                  <div class='city' id="+song.id+">"+song.title+"<i class='fa fa-trash-o' id='delete'></i>\
+                  <div class='city' id="+song.id+">"+song.title+"\
                   </div>\
                   <div class='country'>"+song.artist+"\
                   </div>\

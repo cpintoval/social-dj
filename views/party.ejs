@@ -22,8 +22,12 @@
       <div class="view view-main navbar-through">
         <div class="navbar">
           <div class="navbar-inner">
-            <div class="center sliding"><span class="navbar-logo"></span></div>
+          <a href="/" id="link-logo">
+            <div class="center sliding">
+              <i class="fa fa-music"></i>
+              <span class="logo-navbar">&nbsp;Social DJ</span></div>
             <div class="right"><a href="#" class="open-popup link icon-only"><i class="icon icon-plus">+</i></a></div>
+          </a>
           </div>
         </div>
         <div class="pages">
@@ -37,7 +41,7 @@
                     <a href="#" data-woeid="{{woeid}}" class="item-content item-link">
                       <div class="item-inner">
                         <div class="item-title">
-                          <div class="city" id= <%= songs[i].id %> > <%=songs[i].title%><i class="fa fa-trash-o" id="delete"></i></div>
+                          <div class="city" id=<%= songs[i].id %> > <%=songs[i].title%></div>
                           <div class="country"><%= songs[i].artist %></div>
                         </div>
                         <div class="item-after"><span id="upvoted"> <%=songs[i].voteCount%> </span><i class="fa fa-thumbs-up" id="upvote" ></i></div>
@@ -83,19 +87,8 @@
       <li data-id="{{id}}" data-preview="{{preview_url}}" data-album="{{album.name}}" data-name="{{name}}" data-artist="{{artists[0].name}}" class="close-popup">{{name}} <span>by : {{artists[0].name}} \\\\ Album: From Album: {{album.name}}</span></li>{{/if}}{{/if}}
       {{/each}}
     </script>
-    <script id="home-items-template" type="text/template">{{#each this}}
-      <li data-woeid="{{woeid}}" class="swipeout">
-        <div class="swipeout-content"><a href="#" data-woeid="{{woeid}}" class="item-content item-link">
-            <div class="item-inner">
-              <div class="item-title">
-                <div class="city">{{city}}</div>
-                <div class="city"><%= songs[0].title %></div>
-                <div class="country">{{country}}</div>
-              </div>
-              <div class="item-after">{{condition.temp}}&deg;</div>
-            </div></a></div>
-        <div class="swipeout-actions-right"><a href="#" class="swipeout-delete">Delete</a></div>
-      </li>{{/each}}
+    <script id="home-items-template" type="text/template">
+
     </script>
 
 

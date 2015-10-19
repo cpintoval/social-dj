@@ -44,6 +44,9 @@ body {
   -webkit-background-size: cover;
   background-size: cover;
 }
+#link-logo {
+  color: white;
+}
 /* iOS over scrolling fix */
 html.ios .page {
   overflow: auto;
