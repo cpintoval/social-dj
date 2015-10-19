@@ -30,17 +30,20 @@
           <div data-page="index" class="page">
             <div class="page-content">
               <div class="list-block places-list">
-                <ul>
+                <ul class="songs-list">
                 <% for(var i = 0; i < songs.length; i++) { %>
-                <li  class="swipeout">
-                  <div class="swipeout-content"><a href="#" data-woeid="{{woeid}}" class="item-content item-link">
+                <li  class="swipeout" data-voteCount=<%=songs[i].voteCount%>>
+                  <div class="swipeout-content">
+                    <a href="#" data-woeid="{{woeid}}" class="item-content item-link">
                       <div class="item-inner">
                         <div class="item-title">
                           <div class="city" id= <%= songs[i].id %> > <%=songs[i].title%><i class="fa fa-trash-o" id="delete"></i></div>
                           <div class="country"><%= songs[i].artist %></div>
                         </div>
                         <div class="item-after"><span id="upvoted"> <%=songs[i].voteCount%> </span><i class="fa fa-thumbs-up" id="upvote" ></i></div>
-                      </div></a></div>
+                      </div>
+                      </a>
+                    </div>
                   <div class="swipeout-actions-right"><a href="#" class="swipeout-delete">Delete</a></div>
                 </li>
                 <% } %>

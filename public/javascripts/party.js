@@ -231,8 +231,8 @@ myApp.buildWeatherHTML = function () {
       if ($songOption.text() === ""){
         // $('ul').append('<li id="' +  song.id + '">' + '<i class="fa fa-thumbs-up" id="upvote"></i>'+ song.title + '  VoteCount: <span>' + song.voteCount + '</span>'+'<i class="fa fa-trash-o" id="delete"></i>'+'</li>');
         $('ul').append("\
-          <li class='swipeout'>\
-            <div class='swipeout-content'>\
+          <li class='swipeout' data-voteCount=0>\
+            <div class='swipeout-content'><a class='item-content item-link'>\
               <div class='item-inner'>\
                 <div class='item-title'>\
                   <div class='city' id="+song.id+">"+song.title+"<i class='fa fa-trash-o' id='delete'></i>\
@@ -242,6 +242,7 @@ myApp.buildWeatherHTML = function () {
                 </div>\
                 <div class='item-after'><span id='upvoted'>"+song.voteCount+"</span><i class='fa fa-thumbs-up' id='upvote' ></i></div>\
               </div>\
+              </a>\
             </div>\
             <div class='swipeout-actions-right'><a href='#'' class='swipeout-delete'>Delete</a></div>\
           </li>\
@@ -261,6 +262,23 @@ myApp.buildWeatherHTML = function () {
       $('#songs').append("VoteCount: <span>" + song.voteCount + "</span></li>");
     }else{
       $songToIncrement.parent().parent().find('#upvoted').text(song.voteCount);
+      $songToIncrement.parent().parent().parent().parent().parent().attr('data-voteCount',song.voteCount);
+      setTimeout(function(){
+        var $songsSort = $('ul.songs-list');
+            $songsSortli = $songsSort.children('li');
+        $songsSortli.sort(function(a,b){
+          var an = a.getAttribute('data-voteCount');
+              bn = b.getAttribute('data-voteCount');
+          if(an > bn) {
+            return -1;
+          }
+          if(an < bn) {
+            return 1;
+          }
+          return 0;
+        });
+        $songsSortli.detach().appendTo($songsSort).fadeIn();
+       },1000);
     }
   });
 
@@ -292,5 +310,22 @@ myApp.buildWeatherHTML = function () {
   }
 
 });
+setTimeout(function(){
+  var $songsSort = $('ul.songs-list');
+      $songsSortli = $songsSort.children('li');
+  $songsSortli.sort(function(a,b){
+    var an = a.getAttribute('data-voteCount');
+        bn = b.getAttribute('data-voteCount');
+    if(an > bn) {
+      return -1;
+    }
+    if(an < bn) {
+      return 1;
+    }
+    return 0;
+  });
+  $songsSortli.detach().appendTo($songsSort).fadeIn();
+},300);
+
 
 
