@@ -123,6 +123,40 @@ router.get('/:id', function(request, response) {
   // });
 });
 
+router.get('/:id/dj', function(request, response) {
+
+    var partyID = request.params.id;
+
+    models.party.find(partyID).then(function(party) {
+      if (party) {
+        models.song.findAll({
+          where: {
+            partyId: partyID
+          }
+        }).then(function(songs){
+
+          response.render('dashboard', {
+            party: party,
+            songs: songs
+          });
+        });
+      }
+      else {
+        response.render('error', {
+          message: 'This party does not exist',
+          error: {
+            status: '404',
+            stack: 'Stack level waaay too deep'
+          }
+        });
+      }
+    });
+
+  //   response.render('party', {
+  //   name: request.params.name,
+  //   songs: parties[request.params.name]
+  // });
+});
 
 
 module.exports = router;

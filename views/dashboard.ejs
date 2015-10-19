@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1s.0"/>
+    <title>Party List</title>
+    <link rel='stylesheet' href='http://cdn.foundation5.zurb.com/foundation.css' />
+    <link href='https://fonts.googleapis.com/css?family=Roboto:400,100,300,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+
+    <nav id="navbar" class="top-bar" data-topbar>
+      <ul class="title-area">
+
+        <li class="name">
+          <h1>
+            <a href="#">
+              <i class="fa fa-music"></i>
+              <span id="logo-navbar">Social DJ</span>
+            </a>
+          </h1>
+        </li>
+        <li class="toggle-topbar menu-icon"><a href="#"><span>menu</span></a></li>
+      </ul>
+
+      <section class="top-bar-section">
+        <ul class="right">
+          <li class="divider"></li>
+          <li><a href="/logout">Logout</a></li>
+        </ul>
+      </section>
+    </nav>
+
+    <div id="dashboard" class="row">
+      <div id="live-feed" class="large-6 columns">
+        <table id="song-table">
+          <thead>
+            <tr>
+              <th>Now Trending</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td id="73TU1voolT9RHWGLOHyM0J">
+                <div class="row song">
+                  <div class="large-2 columns">
+                    <div class="votes">
+                      <p>+<span class="vote-count">34</span></p>
+                    </div>
+                  </div>
+                  <div class="large-8 columns">
+                    <span class="title">The Days</span><br>
+                    <span>Avicii</span><br>
+                    <span>The Days</span>
+                  </div>
+                  <div class="large-2 columns">
+                  </div>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td id="73TU1voolT9RHWGLOHyM0J">
+                <div class="row song">
+                  <div class="large-2 columns">
+                    <div class="votes">
+                      <p>+<span class="vote-count">20</span></p>
+                    </div>
+                  </div>
+                  <div class="large-8 columns">
+                    <span class="title">Titanium (Alesso Remix)</span><br>
+                    <span>David Guetta</span><br>
+                    <span>Titanium</span>
+                  </div>
+                  <div class="large-2 columns">
+                  </div>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div id="player" class="large-6 columns">
+        <iframe src="https://embed.spotify.com/?uri=spotify:track:4th1RQAelzqgY7wL53UGQt" width="500" height="530" frameborder="0" allowtransparency="true"></iframe>
+      </div>
+    </div>
+
+    <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+    <script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+    <script src="http://cdn.foundation5.zurb.com/foundation.js"></script>
+
+    <script>
+      $(document).foundation();
+    </script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="/javascripts/dashboard.js"></script>
+  </body>
+</html>

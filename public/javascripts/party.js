@@ -48,9 +48,7 @@ $(function() {
     var currentPartyId = $('#party-name').attr('data');
     var $songOption = $('#' + song.id);
     console.log(song.partyId);
-    // console.log($songOption.text() === "");
     if (song.partyId == currentPartyId){
-      console.log('THEREEREERE');
       if ($songOption.text() === ""){
         $('#songs').append('<li id="' +  song.id + '">' + '<i class="fa fa-thumbs-up" id="upvote"></i>'+ song.title + '  VoteCount: <span>' + song.voteCount + '</span>'+'<i class="fa fa-trash-o" id="delete"></i>'+'</li>');
       }

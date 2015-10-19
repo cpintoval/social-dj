@@ -1,7 +1,7 @@
 body {
   font-family: 'Roboto', sans-serif;
   font-weight: 100;
-  background-color: #2a303c;
+  background-color: #282828;
 }
 
 .hero-mobile {
@@ -111,3 +111,59 @@ body {
 #party-item > a {
   color: white;
 }
+
+#dashboard {
+  width: 100%;
+  height: 100%;
+}
+
+#song-table {
+  width: 100%;
+  height: 100%;
+  background-color: #282828;
+  color: white;
+  border: none;
+}
+
+#song-table thead tr th {
+  height: 80px;
+  text-align: center;
+  background-color: #282828;
+  border-bottom: 2px solid #a0a0a0;
+  color: white;
+  font-size: 40px;
+  font-weight: 100;
+}
+
+#song-table tbody tr td {
+  background-color: #282828;
+  border-bottom: 1px solid #a0a0a0;
+  color: white;
+  transition: all 0.5s ease;
+}
+
+#song-table tbody tr td:hover {
+  background-color: #a0a0a0;
+  color: #282828;
+  cursor: pointer;
+}
+
+.votes p {
+  width: 25px;
+  height: 25px;
+  display: inline-block;
+  color: orange;
+  text-align: center;
+  font-size: 30px;
+}
+
+.title {
+  font-weight: 400;
+  font-size: 20px;
+}
+
+.hide {
+  display: none;
+}
+
+
