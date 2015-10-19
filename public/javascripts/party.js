@@ -179,16 +179,17 @@ myApp.buildWeatherHTML = function () {
 
   $('form').submit(function(event) {
     event.preventDefault();
-    var opt = $('option[value="' + $('#song').val() + '"]');
-    socket.emit('new song', {
-      song: options[opt.attr('id')],
-      party: $('#party-name').attr('data')
-    });
-    $('#song').val('');
+    var opt = $('#usernameinput').val();
+    console.log(opt);
+    // socket.emit('new song', {
+    //   song: options[opt.attr('id')],
+    //   party: $('#party-name').attr('data')
+    // });
+    // $('#song').val('');
     return false;
   });
 
-  $('ul').on("click",'#upvote',function(){
+  $('ul.songs-list').on("click",'#upvote',function(){
     console.log('upvote',$(this).parent().parent().find(".city").attr('id'));
     socket.emit('new vote',{
       song: $(this).parent().parent().find(".city").attr('id'),
@@ -197,7 +198,7 @@ myApp.buildWeatherHTML = function () {
     });
   });
 
-  $('ul').on("click","#delete",function(){
+  $('ul.songs-list').on("click","#delete",function(){
     console.log("delete button",$(this).parent());
     socket.emit('delete song',{
       song: $(this).parent(".city").attr('id'),
@@ -205,30 +206,29 @@ myApp.buildWeatherHTML = function () {
     });
   });
 
-  $('form').on('keypress','#song',function(song){
-    var $song_input =$('#song').val();
-    if ($song_input.length > 4){
-      $.ajax({
-        url: 'http://ws.spotify.com/search/1/track.json?q='+$song_input
-        }).success(function(response){
-          console.log($song_input);
-        autocomplete(response);
-      });
-    }
-  });
+  // $('form').on('keypress','#song',function(song){
+  //   var $song_input =$('#song').val();
+  //   if ($song_input.length > 4){
+  //     $.ajax({
+  //       url: 'http://ws.spotify.com/search/1/track.json?q='+$song_input
+  //       }).success(function(response){
+  //         console.log($song_input);
+  //       autocomplete(response);
+  //     });
+  //   }
+  // });
 
   socket.on('new songed', function(song) {
     html = myApp.buildWeatherHTML(song);
     var currentPartyId = $('#party-name').attr('data');
     var $songOption = $('#' + song.id);
-
     var $newli = $( "<li class='swipeout'>test</li>" );
 
-    console.log(song.partyId);
+    console.log(song.partyId,"song party id");
     if (song.partyId == currentPartyId){
       if ($songOption.text() === ""){
         // $('ul').append('<li id="' +  song.id + '">' + '<i class="fa fa-thumbs-up" id="upvote"></i>'+ song.title + '  VoteCount: <span>' + song.voteCount + '</span>'+'<i class="fa fa-trash-o" id="delete"></i>'+'</li>');
-        $('ul').append("\
+        $('ul.songs-list').append("\
           <li class='swipeout' data-voteCount=0>\
             <div class='swipeout-content'><a class='item-content item-link'>\
               <div class='item-inner'>\
@@ -247,7 +247,7 @@ myApp.buildWeatherHTML = function () {
         ");
       }
       else {
-      $songToIncrement.parent().parent().find('#upvoted').text(song.voteCount);
+      $songOption.parent().parent().find('#upvoted').text(song.voteCount);
       }
     }
   });
