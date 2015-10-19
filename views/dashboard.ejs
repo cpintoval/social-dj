@@ -40,46 +40,33 @@
         <table id="song-table">
           <thead>
             <tr>
-              <th data=<%= party.id %>>Now Trending</th>
+              <th data=<%= party.id %>><%= party.name %> Song Queue</th>
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td data="73TU1voolT9RHWGLOHyM0J">
-                <div class="row song">
-                  <div class="large-2 columns">
-                    <div class="votes">
-                      <p>+<span class="vote-count">34</span></p>
+
+            <!-- Rendering Existing Songs -->
+            <% for (var i = 0; i < songs.length; i++) { %>
+              <tr>
+                <td id=<%= songs[i].id %> data=<%= songs[i].spotify_id %>>
+                  <div class="row song">
+                    <div class="large-2 columns">
+                      <div class="votes">
+                        <p>+<span class="vote-count"><%= songs[i].voteCount %></span></p>
+                      </div>
+                    </div>
+                    <div class="large-8 columns">
+                      <span class="title"><%= songs[i].title %></span><br>
+                      <span><%= songs[i].artist %></span><br>
+                      <span><%= songs[i].album %></span>
+                    </div>
+                    <div class="large-2 columns">
                     </div>
                   </div>
-                  <div class="large-8 columns">
-                    <span class="title">The Days</span><br>
-                    <span>Avicii</span><br>
-                    <span>The Days</span>
-                  </div>
-                  <div class="large-2 columns">
-                  </div>
-                </div>
-              </td>
-            </tr>
-            <tr>
-              <td id="73TU1voolT9RHWGLOHyM0J">
-                <div class="row song">
-                  <div class="large-2 columns">
-                    <div class="votes">
-                      <p>+<span class="vote-count">20</span></p>
-                    </div>
-                  </div>
-                  <div class="large-8 columns">
-                    <span class="title">Titanium (Alesso Remix)</span><br>
-                    <span>David Guetta</span><br>
-                    <span>Titanium</span>
-                  </div>
-                  <div class="large-2 columns">
-                  </div>
-                </div>
-              </td>
-            </tr>
+                </td>
+              </tr>
+            <% } %>
+            
           </tbody>
         </table>
       </div>

@@ -112,10 +112,6 @@ router.get('/:id', function(request, response) {
       }
     });
 
-  //   response.render('party', {
-  //   name: request.params.name,
-  //   songs: parties[request.params.name]
-  // });
 });
 
 router.get('/:id/dj', function(request, response) {
@@ -147,10 +143,6 @@ router.get('/:id/dj', function(request, response) {
       }
     });
 
-  //   response.render('party', {
-  //   name: request.params.name,
-  //   songs: parties[request.params.name]
-  // });
 });
 
 
