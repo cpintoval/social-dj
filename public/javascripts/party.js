@@ -225,9 +225,7 @@ myApp.buildWeatherHTML = function () {
     var $newli = $( "<li class='swipeout'>test</li>" );
 
     console.log(song.partyId);
-    // console.log($songOption.text() === "");
     if (song.partyId == currentPartyId){
-      console.log('THEREEREERE');
       if ($songOption.text() === ""){
         // $('ul').append('<li id="' +  song.id + '">' + '<i class="fa fa-thumbs-up" id="upvote"></i>'+ song.title + '  VoteCount: <span>' + song.voteCount + '</span>'+'<i class="fa fa-trash-o" id="delete"></i>'+'</li>');
         $('ul').append("\
