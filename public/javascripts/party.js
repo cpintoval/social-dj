@@ -131,13 +131,7 @@ myApp.buildWeatherHTML = function () {
     });
   });
 
-  $('ul.songs-list').on("click","#delete",function(){
-    console.log("delete button",$(this).parent());
-    socket.emit('delete song',{
-      song: $(this).parent(".city").attr('id'),
-      party: $('#party-name').attr('data')
-    });
-  });
+
 
   // $('form').on('keypress','#song',function(song){
   //   var $song_input =$('#song').val();
@@ -214,10 +208,6 @@ myApp.buildWeatherHTML = function () {
     }
   });
 
-  socket.on('deleted song',function(obj){
-    console.log('deleted song');
-    $('#' + obj.song).parent().parent().parent().parent().remove();
-  });
 
   //for error handing in the song input
   socket.on('error', function(){

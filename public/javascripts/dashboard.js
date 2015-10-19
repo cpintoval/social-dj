@@ -5,7 +5,6 @@ $(function() {
 
   $(document).on('click', 'td', function() {
     var spotify_id = $(this).attr('data');
-    $(this).addClass('hide');
     $('iframe').attr('src', url + spotify_id);
   });
 
@@ -70,5 +69,18 @@ $(function() {
       }, 1000);
     }
   });
+
+  $('.delete').on("click","#delete",function(){
+      socket.emit('delete song',{
+        song: $(this).parent().parent().parent().parent().parent().attr('id'),
+        party: $('th').attr('data')
+    });
+  });
+
+  socket.on('deleted song',function(obj){
+    console.log('deleted song');
+    $('#' + obj.song).parent().remove();
+  });
+
 
 });
