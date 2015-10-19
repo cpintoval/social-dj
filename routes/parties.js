@@ -56,6 +56,38 @@ router.post('/', function(request, response){
     });
 });
 
+router.post('/archive',function(request,response){
+  var partyId = request.body.partyid;
+  models.party.update({
+    active: false,
+    }, {
+    where: {
+      id: partyId
+    }
+  }).then(function(data){
+
+    models.party.findOne({
+      where: {
+        id: request.body.partyid
+      }
+    }).then(function(party){
+
+    response.send(party);
+    })
+  });
+});
+
+router.post('/remove',function(request,response){
+  var partyId = request.body.partyid;
+  models.party.destroy({
+    where: {
+      id: partyId
+    }
+  }).then(function(data){
+    response.send("removed");
+  });
+});
+
 router.get('/:id', function(request, response) {
 
     var partyID = request.params.id;
@@ -91,17 +123,6 @@ router.get('/:id', function(request, response) {
   // });
 });
 
-router.post('/delete',function(request,response){
-  var partyId = request.body.partyid;
-  models.party.update({
-    active: false,
-    }, {
-    where: {
-      id: partyId
-    }
-  }).then(function(data){
-    response.send(data);
-  });
-});
+
 
 module.exports = router;

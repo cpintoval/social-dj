@@ -1,17 +1,14 @@
-var newName;
-
 $('#newparty-button').click(function(event){
   event.preventDefault();
-  newName = $('#new-party').val();
+  var newName = $('#new-party').val();
 
   if(newName !== ''){
 
     $.post('/parties', {partyName: newName}, function(response){
-      console.log(response);
       if (response){
-        console.log(response);
         $('#new-party').val('');
-        $('#created-parties').append('<li><a href="/parties/' + response.id + '">' + response.name + '</a></li>');
+        $('#created-parties').append('<li><a href="/parties/' + response.id + '">' + response.name + '</a><i class="fa fa-archive" id="archive" data="' + response.id + '"></i></li>');
+        window.location.href="/parties";
 
       }
     })
@@ -20,9 +17,30 @@ $('#newparty-button').click(function(event){
   }
 })
 
-$('#delete').on('click',function(){
+$('#archive').on('click',function(){
 
-  $.post('/parties/delete',{partyid: $(this).attr("data")},function(response){
-    console.log("responded")
+  var $thatParty = $(this).parent();
+
+  $.post('/parties/archive',{partyid: $(this).attr("data")},function(response){
+
+    console.log(response);
+
+    var $newListItem = $thatParty.empty().append('<div id="party-item"><a href="/parties/' + response.id + '">' + response.name + '</a><i class="fa fa-trash-o" id="remove" data="' + response.id + '"></i></div>');
+
+    if (response){
+      $thatParty.remove();
+      $('#past').append($newListItem);
+    }
+  });
+});
+
+$('#remove').on('click',function(){
+
+  var $thisParty = $(this).parent();
+
+  $.post('/parties/remove',{partyid: $(this).attr("data")},function(response){
+    if (response === "removed"){
+      $thisParty.remove();
+    }
   });
 });

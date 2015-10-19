@@ -1,42 +1,107 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1s.0"/>
     <title>Party List</title>
+    <link rel='stylesheet' href='http://cdn.foundation5.zurb.com/foundation.css' />
+    <link href='https://fonts.googleapis.com/css?family=Roboto:400,100,300,700' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
     <link rel='stylesheet' href='/stylesheets/style.css' />
   </head>
   <body>
 
-    <p>Hello, <%= email %>. Welcome back! Your password is <%= password %></p><br/><br/>
-    <h1>Party List</h1>
-    <ul id='created-parties'>
+    <nav id="navbar" class="top-bar" data-topbar>
+          <ul class="title-area">
+
+            <li class="name">
+              <h1>
+                <a href="#">
+                  <i class="fa fa-music"></i>
+                  <span id="logo-navbar">Social DJ</span>
+                </a>
+              </h1>
+            </li>
+            <li class="toggle-topbar menu-icon"><a href="#"><span>menu</span></a></li>
+          </ul>
+
+          <section class="top-bar-section">
+            <ul class="right">
+              <li class="divider"></li>
+              <li><a href="#" data-reveal-id="hostPartyModal">Host Party</a></li>
+              <li class="divider"></li>
+              <li><a href="/logout">Logout</a></li>
+            </ul>
+          </section>
+        </nav>
+
+        <div class="row">
+          <div id="profile" class="small-12 large-4 columns">
+            <img id="profile-picture" src="/images/dj-profile.png"><h1 class="header"><%= email %></h1>
+          </div>
+
+        </div>
+
+        <div class="row">
+          <div id="active" class="small-12 large-6 columns">
+            <h3 class="header-dj">Active Parties</h3>
+            <div class="row">
+              <div class="small-2 large-2 columns">
+                <% for(var i = 0; i < parties.length; i++) { %>
+                  <% if(parties[i].dataValues.active === true){ %>
+                  <div id="party-item"><a href=<%= '/parties/' + parties[i].dataValues.id %>><%= parties[i].dataValues.name %></a><i class="fa fa-archive" id="archive" data=<%=parties[i].dataValues.id%>></i></div>
+                  <% } %>
+                <% } %>
+              </div>
+            </div>
+          </div>
+          <div id="past" class="small-12 large-6 columns">
+            <h3 class="header-dj">Party Archive</h3>
+            <div class="small-2 large-2 columns">
+              <% for(var i = 0; i < parties.length; i++) { %>
+                <% if(parties[i].dataValues.active === false){ %>
+                <div id="party-item"><a href=<%= '/parties/' + parties[i].dataValues.id %>><%= parties[i].dataValues.name %></a><i class="fa fa-trash-o" id="remove" data=<%=parties[i].dataValues.id%>></i></div>
+                <% } %>
+              <% } %>
+            </div>
+          </div>
+        </div>
+
+        <div id="hostPartyModal" class="reveal-modal" data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
+          <h2 id="modalTitle">Host a new party</h2>
+          <form id="newparty-form">
+            <input type="text" size="30" placeholder="Type your new party name here" id="new-party"><br/>
+            <input type="button" id="newparty-button" value="Create Party"></input>
+          </form>
+        </div>
+
+    <!-- <h1>Party List</h1>
+    <ul class='newparties'>
       <% for(var i = 0; i < parties.length; i++) { %>
         <% if(parties[i].dataValues.active === true){ %>
-        <li><a href=<%= '/parties/' + parties[i].dataValues.id %>><%= parties[i].dataValues.name %></a><i class="fa fa-archive" id="delete" data=<%=parties[i].dataValues.id%>></i></li>
+        <li><a href=<%= '/parties/' + parties[i].dataValues.id %>><%= parties[i].dataValues.name %></a><i class="fa fa-archive" id="archive" data=<%=parties[i].dataValues.id%>></i></li>
         <% } %>
       <% } %>
 
     </ul>
 
     <h2>Old Party List</h2>
-    <ul id='parties'>
+    <ul class='oldparties'>
       <% for(var i = 0; i < parties.length; i++) { %>
         <% if(parties[i].dataValues.active === false){ %>
-        <li><a href=<%= '/parties/' + parties[i].dataValues.id %>><%= parties[i].dataValues.name %></a></li>
+        <li><a href=<%= '/parties/' + parties[i].dataValues.id %>><%= parties[i].dataValues.name %></a><i class="fa fa-trash-o" id="remove" data=<%=parties[i].dataValues.id%>></i></li>
         <% } %>
       <% } %>
 
-    </ul>
-
-    <form id="newparty-form">
-      <input type="text" size="30" placeholder="Type your new party name here" id="new-party"><br/>
-      <input type="button" id="newparty-button" value="Create Party"></input>
-    </form>
-
-    <a href="/logout">Logout</a>
+    </ul> -->
 
     <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
     <script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+    <script src="http://cdn.foundation5.zurb.com/foundation.js"></script>
+
+    <script>
+      $(document).foundation();
+    </script>
     <script src="/socket.io/socket.io.js"></script>
     <script src="/javascripts/parties.js"></script>
   </body>
