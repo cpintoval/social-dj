@@ -125,7 +125,17 @@ router.get('/:id/dj', function(request, response) {
             partyId: partyID
           }
         }).then(function(songs){
-
+          songs.sort(function(a, b) {
+            if(a.voteCount > b.voteCount) {
+              return -1;
+            }
+            else if(a.voteCount < b.voteCount) {
+              return 1;
+            }
+            else {
+              return 0;
+            }
+          });
           response.render('dashboard', {
             party: party,
             songs: songs
