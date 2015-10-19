@@ -15,7 +15,7 @@ $(function() {
     if (partyId == song.partyId) {
       if ($songOption.text() === "") {
         $('tbody').append("\
-          <tr>\
+          <tr data-votes=0>\
             <td id=" + song.id + " data=" + song.spotify_id + ">\
               <div class='row song'>\
                 <div class='large-2 columns'>\
@@ -37,6 +37,7 @@ $(function() {
       }
       else {
         $songOption.find('.vote-count').text(song.voteCount);
+        $songOption.parent().attr('data-votes', song.voteCount);
       }
     }
   });
@@ -48,13 +49,24 @@ $(function() {
     }
     else {
       $songToIncrement.find('.vote-count').text(song.voteCount);
+      $songToIncrement.parent().attr('data-votes', song.voteCount);
       setTimeout(function() {
         var $songsTable = $('tbody');
         var $songsArray = $songsTable.children('tr');
         $songsArray.sort(function(a, b) {
-          var votesA = a.find('.vote-count').text();
-          
+          var votesA = a.getAttribute('data-votes');
+          var votesB = b.getAttribute('data-votes');
+          if (votesA > votesB) {
+            return -1;
+          }
+          else if (votesA < votesB) {
+            return 1;
+          }
+          else {
+            return 0;
+          }
         });
+        $songsArray.detach().appendTo($songsTable).fadeIn();
       }, 1000);
     }
   });

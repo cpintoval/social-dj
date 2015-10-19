@@ -181,6 +181,7 @@ myApp.buildWeatherHTML = function () {
       }
       else {
       $songOption.parent().parent().find('#upvoted').text(song.voteCount);
+      $songOption.parent().parent().parent().parent().parent().attr('data-voteCount',song.voteCount);
       }
     }
   });
