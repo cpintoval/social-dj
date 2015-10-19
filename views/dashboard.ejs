@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1s.0"/>
-    <title>Party List</title>
+    <title><%= party.name %></title>
     <link rel='stylesheet' href='http://cdn.foundation5.zurb.com/foundation.css' />
     <link href='https://fonts.googleapis.com/css?family=Roboto:400,100,300,700' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
@@ -28,6 +28,8 @@
       <section class="top-bar-section">
         <ul class="right">
           <li class="divider"></li>
+          <li><a href="/parties">Parties</a></li>
+          <li class="divider"></li>
           <li><a href="/logout">Logout</a></li>
         </ul>
       </section>
@@ -38,12 +40,12 @@
         <table id="song-table">
           <thead>
             <tr>
-              <th>Now Trending</th>
+              <th data=<%= party.id %>>Now Trending</th>
             </tr>
           </thead>
           <tbody>
             <tr>
-              <td id="73TU1voolT9RHWGLOHyM0J">
+              <td data="73TU1voolT9RHWGLOHyM0J">
                 <div class="row song">
                   <div class="large-2 columns">
                     <div class="votes">

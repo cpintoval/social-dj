@@ -38,7 +38,7 @@ router.post('/goto', function(request, response){
   });
 });
 
-router.post('/', function(request,response){
+router.post('/', function(request,response) {
   sess = request.session;
 
   models.dj.findAll({
