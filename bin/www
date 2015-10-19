@@ -98,9 +98,11 @@ models.sequelize.sync().then(function () {
         models.song.findAll({
           where: {
             spotify_id: obj.song.id,
-            partyId: obj.partyId
+            partyId: obj.partyId,
+            cookie: obj.cookie
           }
         }).then(function(response) {
+          console.log(response,"logging the response of the data query!", obj.song.id);
           if (response.length === 0) {
             models.song.create({
               title: obj.song.name,
@@ -109,17 +111,24 @@ models.sequelize.sync().then(function () {
               voteCount: 0,
               img_url: "",
               spotify_id: obj.song.id,
-              partyId: obj.partyId
+              partyId: obj.partyId,
+              cookie: obj.cookie
             }).then(function(song) {
               io.emit('new songed', song);
             });
           }
           else {
-            // Vote for the song
+            console.log(response[0].cookie,"the response cookie");
             var song = response[0];
-            song.increment('voteCount').then(function(resp) {
-              io.emit('new songed', song);
-            });
+
+            if (response[0].cookie === 0){
+              song.increment('voteCount').then(function(resp) {
+                io.emit('new songed', song);
+              });
+            }else{
+              console.log("rejected!!!!!!!");
+            }
+            // Vote for the song
           }
         });
       } else {
