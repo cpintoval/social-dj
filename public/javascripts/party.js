@@ -17,7 +17,6 @@ $(function() {
   var searchTimeout;
   myApp.searchLocation = function (search) {
     // var query = encodeURIComponent('select * from geo.places where text="' + search + '"');
-    // var q = 'http://query.yahooapis.com/v1/public/yql?q=' + query + '&format=json';
     if (searchTimeout) clearTimeout(searchTimeout);
     $('.popup .preloader').show();
     searchTimeout = setTimeout(function () {
@@ -43,72 +42,7 @@ $(function() {
   };
 
   // Get locations weather data
-  myApp.updateWeatherData = function (callback) {
-    var woeids = [];
-    if (!localStorage.w7Places) return;
-    var places = $.parseJSON(localStorage.w7Places);
-    if (places.length === 0) {
-        localStorage.w7Data = JSON.stringify([]);
-        return;
-    }
-    if (!navigator.onLine) {
-        myApp.alert('You need internet connection to search for songs');
-    }
-    for (var i = 0; i < places.length; i++) {
-        woeids.push(places[i].woeid);
-    }
-    var query = encodeURIComponent('select * from weather.forecast where woeid in (' + JSON.stringify(woeids).replace('[', '').replace(']', '') + ') and u="c"');
-    var q = 'http://query.yahooapis.com/v1/public/yql?q=' + query + '&format=json';
-    myApp.showIndicator();
-    $.get(q, function (data) {
-      var weatherData = [];
-      myApp.hideIndicator();
-      data = $.parseJSON(data);
-      if (!data.query || !data.query.results) return;
-      var places = data.query.results.channel;
-      var place;
-      if ($.isArray(places)) {
-          for (var i = 0; i < places.length; i++) {
-              place = places[i];
-              weatherData.push({
-                  city: place.location.city,
-                  country: place.location.country,
-                  region: place.location.region,
-                  humidity: place.atmosphere.humidity,
-                  pressure: place.atmosphere.pressure,
-                  sunrise: place.astronomy.sunrise,
-                  sunset: place.astronomy.sunset,
-                  wind: place.wind,
-                  condition: place.item.condition,
-                  forecast: place.item.forecast,
-                  lat: place.item.lat,
-                  long: place.item.long,
-                  woeid: woeids[i]
-              });
-          }
-      }
-      else {
-          place = places;
-          weatherData.push({
-              city: place.location.city,
-              country: place.location.country,
-              region: place.location.region,
-              humidity: place.atmosphere.humidity,
-              pressure: place.atmosphere.pressure,
-              sunrise: place.astronomy.sunrise,
-              sunset: place.astronomy.sunset,
-              wind: place.wind,
-              condition: place.item.condition,
-              forecast: place.item.forecast,
-              lat: place.item.lat,
-              long: place.item.long,
-              woeid: woeids[0]
-          });
-      }
-      localStorage.w7Data = JSON.stringify(weatherData);
-      if (callback) callback();
-  });
-};
+
 // Build list of places on home page
 myApp.buildWeatherHTML = function () {
     var weatherData = localStorage.w7Data;
@@ -168,9 +102,7 @@ myApp.buildWeatherHTML = function () {
 
   // Update html and weather data on app load
   myApp.buildWeatherHTML();
-  myApp.updateWeatherData(function () {
-      myApp.buildWeatherHTML();
-  });
+
 
   // Sockets and jQuery
   var socket = io();
