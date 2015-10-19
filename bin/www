@@ -98,7 +98,7 @@ models.sequelize.sync().then(function () {
         models.song.findAll({
           where: {
             spotify_id: obj.song.id,
-            partyId: obj.party
+            partyId: obj.partyId
           }
         }).then(function(response) {
           if (response.length === 0) {
@@ -118,7 +118,7 @@ models.sequelize.sync().then(function () {
             // Vote for the song
             var song = response[0];
             song.increment('voteCount').then(function(resp) {
-              io.emit('new song', song);
+              io.emit('new songed', song);
             });
           }
         });

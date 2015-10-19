@@ -35,9 +35,27 @@ $(function() {
           </tr>\
             ");
       }
+      else {
+        $songOption.find('.vote-count').text(song.voteCount);
+      }
+    }
+  });
+
+  socket.on('new voted', function(song) {
+    var $songToIncrement = $('#' + song.id);
+    if ($songToIncrement.text() === "") {
+
     }
     else {
-      $songOption.find('.vote-count').text();
+      $songToIncrement.find('.vote-count').text(song.voteCount);
+      setTimeout(function() {
+        var $songsTable = $('tbody');
+        var $songsArray = $songsTable.children('tr');
+        $songsArray.sort(function(a, b) {
+          var votesA = a.find('.vote-count').text();
+          
+        });
+      }, 1000);
     }
   });
 

@@ -247,7 +247,7 @@ myApp.buildWeatherHTML = function () {
         ");
       }
       else {
-      $songToIncrement.parent().parent().find('#upvoted').text(song.voteCount);
+      $songOption.parent().parent().find('#upvoted').text(song.voteCount);
       }
     }
   });
