@@ -6,7 +6,8 @@ module.exports = function(sequelize, DataTypes) {
     artist: DataTypes.STRING,
     voteCount: DataTypes.INTEGER,
     img_url: DataTypes.STRING,
-    spotify_id: DataTypes.STRING
+    spotify_id: DataTypes.STRING,
+    cookie: DataTypes.STRING
   }, {
     classMethods: {
       associate: function(models) {

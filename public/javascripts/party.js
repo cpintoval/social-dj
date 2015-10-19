@@ -146,7 +146,8 @@ myApp.buildWeatherHTML = function () {
     var songData = $(this)[0].dataset;
     socket.emit('new song', {
       song: songData,
-      partyId: $('#party-name').attr('data')
+      partyId: $('#party-name').attr('data'),
+      cookie: x
     });
     // var woeid = li.attr('data-woeid');
     // var city = li.attr('data-city');
@@ -180,7 +181,7 @@ myApp.buildWeatherHTML = function () {
   $('form').submit(function(event) {
     event.preventDefault();
     var opt = $('#usernameinput').val();
-    console.log(opt);
+    alert(opt);
     // socket.emit('new song', {
     //   song: options[opt.attr('id')],
     //   party: $('#party-name').attr('data')
