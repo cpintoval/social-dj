@@ -5,7 +5,7 @@ body {
   width: 100%;
 }
 body {
-  background: #000;
+  background: #282828;
 }
 /*==============================
     Blured effect on views
@@ -35,12 +35,12 @@ body {
     Pages styling
 ==============================*/
 .pages {
-  background: #000;
+  background: #282828;
 }
 .page[data-page="index"],
 .page[data-page="detail"] {
   background: none;
-  background: #000000 url(../img/bg.jpg) no-repeat center;
+  background: #282828 no-repeat center;
   -webkit-background-size: cover;
   background-size: cover;
 }
@@ -68,7 +68,7 @@ html.ios .page-content {
 span.navbar-logo {
   width: 100px;
   height: 25px;
-  background: url(../img/logo.png) no-repeat center;
+  background: no-repeat center;
   -webkit-background-size: 100% auto;
   background-size: 100% auto;
   display: block;
