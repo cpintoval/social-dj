@@ -30,10 +30,9 @@ router.post('/goto', function(request, response){
 
   models.party.findOne({
     where: {
-      name: request.body.partyName
+      id: request.body.partyCode
     }
   }).then(function(goToParty){
-    console.log(goToParty);
     response.send(goToParty);
   });
 });
