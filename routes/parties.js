@@ -117,41 +117,53 @@ router.get('/:id', function(request, response) {
 router.get('/:id/dj', function(request, response) {
 
     var partyID = request.params.id;
+    console.log('The session is: ');
+    console.log(request.session);
 
-    models.party.find(partyID).then(function(party) {
-      if (party) {
-        models.song.findAll({
-          where: {
-            partyId: partyID
-          }
-        }).then(function(songs){
-          songs.sort(function(a, b) {
-            if(a.voteCount > b.voteCount) {
-              return -1;
+    if (request.session.email) {
+
+      
+
+      models.party.find(partyID).then(function(party) {
+        if (party) {
+          models.song.findAll({
+            where: {
+              partyId: partyID
             }
-            else if(a.voteCount < b.voteCount) {
-              return 1;
-            }
-            else {
-              return 0;
+          }).then(function(songs){
+            songs.sort(function(a, b) {
+              if(a.voteCount > b.voteCount) {
+                return -1;
+              }
+              else if(a.voteCount < b.voteCount) {
+                return 1;
+              }
+              else {
+                return 0;
+              }
+            });
+            response.render('dashboard', {
+              party: party,
+              songs: songs
+            });
+          });
+        }
+        else {
+          response.render('error', {
+            message: 'This party does not exist',
+            error: {
+              status: '404',
+              stack: 'Stack level waaay too deep'
             }
           });
-          response.render('dashboard', {
-            party: party,
-            songs: songs
-          });
-        });
-      }
-      else {
-        response.render('error', {
-          message: 'This party does not exist',
-          error: {
-            status: '404',
-            stack: 'Stack level waaay too deep'
-          }
-        });
-      }
-    });
+        }
+      });
+    }
+    else {
+      response.redirect('/parties/' + partyID);
+    }
+
+    
 
 });
 
