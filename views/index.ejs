@@ -25,7 +25,7 @@
             <li class="toggle-topbar menu-icon"><a href="#"><span>menu</span></a></li>
           </ul>
 
-          <section class="top-bar-section">
+          <section class="top-bar-section show-for-medium-up">
             <ul class="right">
               <li class="divider"></li>
               <li><a href="#" data-reveal-id="loginModal">Login</a></li>
@@ -35,14 +35,13 @@
 
     <div class="hero-mobile show-for-small-only">
       <div class="row">
-        <div class="small-12 large-12 columns">
+        <div class="small-12 columns">
           <h1 id="logo-mobile"> <i id="music-icon" class="fa fa-music"></i> Social DJ</h1>
-          <h3 class="header">Start hosting your party</h3>
-          <a href="#" data-reveal-id="signUpModal" class="round button">Sign up</a>
-        </div>
-        <div class="small-12 large-12 columns">
           <h3 class="header-mobile">Let the crowd choose the songs</h3>
-          <p>Join a party and start choosing the songs you want to listen</p>
+        </div>
+        <br>
+        <br>
+        <div class="small-12 large-12 columns">
           <form id="party-search">
             <div class="row">
               <div class="large-12 columns">
@@ -63,15 +62,19 @@
 
     <div class="hero show-for-medium-up">
       <div class="row">
-        <div class="medium-6 large-6 columns">
+        <div class="medium-12 large-12 columns">
           <h1 id="logo"> <i id="music-icon" class="fa fa-music"></i> Social DJ</h1>
-          <h3 class="header">Start hosting your party</h3>
-          <a href="#" data-reveal-id="signUpModal" class="round button">Sign up</a>
+          <h3 class="header">Let the crowd choose the songs</h3>
+        </div>
+      </div>
+      <br>
+      <br>
+      <div class="row">
+        <div class="medium-6 large-6 columns">
+          <a href="#" data-reveal-id="signUpModal" class="round button large">Start hosting a party!</a>
         </div>
         <div id="right-col" class="medium-6 large-6 columns">
-          <h3 class="header">Let the crowd choose the songs</h3>
-          <p>Join a party and start choosing the songs you want to listen</p>
-          <form id="party-search">
+          <form>
             <div class="row">
               <div class="large-12 columns">
                 <div class="row collapse postfix-round">
@@ -79,7 +82,7 @@
                     <input id="bigparty-input" type="text" placeholder="Enter party code">
                   </div>
                   <div class="small-3 large-3 columns">
-                    <a href="#" id="bigpartysearch-button" class="button postfix">Join!</a>
+                    <a href="#" id="bigpartysearch-button" class="button large">Join!</a>
                   </div>
                 </div>
               </div>
@@ -93,9 +96,9 @@
     <div id="signUpModal" class="reveal-modal" data-reveal aria-labelledby="signUpModalTitle" aria-hidden="true" role="dialog">
       <h2 id="signUpModalTitle">Sign Up</h2>
       <form id="signup">
-        <input type="text" size="30" placeholder="Signup with your email here" id="new-email"><br/>
+        <input type="text" size="30" placeholder="Sign up with your email here" id="new-email"><br/>
         <input type="password" size="30" placeholder="Password here" id="new-password"><br/>
-        <input type="button" id="signup-button" value="Signup"></input>
+        <input class="button round" type="button" id="signup-button" value="Start hosting!"></input>
       </form>
       <a class="close-reveal-modal" aria-label="Close">&#215;</a>
     </div>
@@ -105,7 +108,7 @@
       <form id="login">
         <input type="text" size="30" placeholder="Login with your email here" id="email"><br/>
         <input type="password" size="30" placeholder="Password here" id="password"><br/>
-        <input type="button" id="login-button" value="login"></input>
+        <input class="button round" type="button" id="login-button" value="Login"></input>
       </form>
       <a class="close-reveal-modal" aria-label="Close">&#215;</a>
     </div>
