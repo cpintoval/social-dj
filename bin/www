@@ -169,6 +169,10 @@ models.sequelize.sync().then(function () {
       });
     });
 
+    socket.on('now playing',function(playing){
+      io.emit('now played',playing);
+    });
+
     socket.on('delete song',function(obj){
       console.log(obj);
       models.vote.destroy({

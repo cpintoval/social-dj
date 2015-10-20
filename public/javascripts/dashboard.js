@@ -12,6 +12,10 @@ $(function() {
       $playing.hide();
     }
     $(this).find('div.equalizer').attr('id', 'playing').show();
+    socket.emit('now playing',{
+      playing: $(this).attr('id'),
+      partyId: $('th').attr('data')
+    });
   });
 
   socket.on('new songed', function(song) {
