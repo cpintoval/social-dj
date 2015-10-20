@@ -168,8 +168,7 @@ body {
 
 .equalizer {
   position: absolute;
-  top: 50%;
-  bottom: 50%;
+  margin-top: 10%;
   transform: translate(-50%);
 }
 

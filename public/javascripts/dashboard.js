@@ -23,10 +23,19 @@ $(function() {
                     <p>+<span class='vote-count'>" + song.voteCount + "</span></p>\
                   </div>\
                 </div>\
-                <div class='large-8 columns'>\
+                <div class='large-6 columns'>\
                   <span class='title'>" + song.title + "</span><br>\
                   <span>" + song.artist + "</span><br>\
                   <span>" + song.album + "</span>\
+                </div>\
+                <div class='large-2 columns'>\
+                  <div class='equalizer hide'>\
+                    <div class='bar'></div>\
+                    <div class='bar'></div>\
+                    <div class='bar'></div>\
+                    <div class='bar'></div>\
+                    <div class='bar'></div>\
+                  </div>\
                 </div>\
                 <div class='large-2 columns'>\
                   <div class='delete'>\
