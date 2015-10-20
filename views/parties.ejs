@@ -50,6 +50,7 @@
                 <% for(var i = 0; i < parties.length; i++) { %>
                   <% if(parties[i].dataValues.active === true){ %>
                   <div id="party-item"><a href=<%= '/parties/' + parties[i].dataValues.id + '/dj' %>><%= parties[i].dataValues.name %></a><i class="fa fa-archive" id="archive" data=<%=parties[i].dataValues.id%>></i></div>
+                  </br>
                   <% } %>
                 <% } %>
               </div>
@@ -61,6 +62,7 @@
               <% for(var i = 0; i < parties.length; i++) { %>
                 <% if(parties[i].dataValues.active === false){ %>
                 <div id="party-item"><a href=<%= '/parties/' + parties[i].dataValues.id + '/dj' %>><%= parties[i].dataValues.name %></a><i class="fa fa-trash-o" id="remove" data=<%=parties[i].dataValues.id%>></i></div>
+                </br>
                 <% } %>
               <% } %>
             </div>
