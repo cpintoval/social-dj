@@ -165,7 +165,7 @@ myApp.buildWeatherHTML = function () {
                   <div class='country'>"+song.artist+"\
                   </div>\
                 </div>\
-                <div class='item-after'><span id='upvoted'>"+song.voteCount+"&nbsp;</span><i class='fa fa-thumbs-up' id='upvote' ></i></div>\
+                <div class='item-after'><span id='upvoted'>"+song.voteCount+"</span>&nbsp;<i class='fa fa-thumbs-up' id='upvote' ></i></div>\
               </div>\
               </a>\
             </div>\
