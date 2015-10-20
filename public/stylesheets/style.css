@@ -50,7 +50,6 @@ body {
 
 #party-search {
   text-align: center;
-  height: 
 }
 
 #navbar {
@@ -168,36 +167,36 @@ body {
 
 .equalizer {
   position: absolute;
-  top: 50%;
-  bottom: 50%;
+  margin-top: 10%;
   transform: translate(-50%);
+  display: none;
 }
 
 .bar {
   background-color: white;
-  width: 5px;
+  width: 2px;
   height: 30px;
   display: inline-block;
   animation: eq 0.3s ease-in 0s infinite alternate;
 }
 
-.bar:nth-child(5) {
+.bar:nth-child(6) {
   animation-delay: 0.75s;
 }
 
-.bar:nth-child(4) {
+.bar:nth-child(5) {
   animation-delay: 0.60s;
 }
 
-.bar:nth-child(3) {
+.bar:nth-child(4) {
   animation-delay: 0.45s;
 }
 
-.bar:nth-child(2) {
+.bar:nth-child(3) {
   animation-delay: 0.30s;
 }
 
-.bar:nth-child(1) {
+.bar:nth-child(2) {
   animation-delay: 0.15s;
 }
 

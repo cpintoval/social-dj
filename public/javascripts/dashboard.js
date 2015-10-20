@@ -6,7 +6,12 @@ $(function() {
   $(document).on('click', 'td', function() {
     var spotify_id = $(this).attr('data');
     $('iframe').attr('src', url + spotify_id);
-    $(this).find('div.equalizer').toggleClass('hide');
+    var $playing = $('#playing');
+    if ($playing.length) {
+      $playing.removeAttr('id');
+      $playing.hide();
+    }
+    $(this).find('div.equalizer').attr('id', 'playing').show();
     socket.emit('now playing',{
       playing: $(this).attr('id'),
       partyId: $('th').attr('data')
@@ -27,10 +32,19 @@ $(function() {
                     <p>+<span class='vote-count'>" + song.voteCount + "</span></p>\
                   </div>\
                 </div>\
-                <div class='large-8 columns'>\
+                <div class='large-6 columns'>\
                   <span class='title'>" + song.title + "</span><br>\
                   <span>" + song.artist + "</span><br>\
                   <span>" + song.album + "</span>\
+                </div>\
+                <div class='large-2 columns'>\
+                  <div class='equalizer hide'>\
+                    <div class='bar'></div>\
+                    <div class='bar'></div>\
+                    <div class='bar'></div>\
+                    <div class='bar'></div>\
+                    <div class='bar'></div>\
+                  </div>\
                 </div>\
                 <div class='large-2 columns'>\
                   <div class='delete'>\
