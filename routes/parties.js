@@ -117,8 +117,6 @@ router.get('/:id', function(request, response) {
 router.get('/:id/dj', function(request, response) {
 
     var partyID = request.params.id;
-    console.log('The session is: ');
-    console.log(request.session);
 
     if (request.session.email) {
 

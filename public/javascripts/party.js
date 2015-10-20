@@ -170,7 +170,6 @@ myApp.buildWeatherHTML = function () {
               </div>\
               </a>\
             </div>\
-            <div class='swipeout-actions-right'><a href='#'' class='swipeout-delete'>Delete</a></div>\
           </li>\
         ");
       }
