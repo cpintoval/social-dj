@@ -126,6 +126,7 @@ myApp.buildWeatherHTML = function () {
     socket.emit('new vote',{
       song: $(this).parent().parent().find(".city").attr('id'),
       party: $('#party-name').attr('data'),
+      spotifyId: $(this).parent().parent().find(".city").attr('data-spotify'),
       cookie: x
     });
   });
@@ -161,7 +162,7 @@ myApp.buildWeatherHTML = function () {
             <div class='swipeout-content'><a class='item-content item-link'>\
               <div class='item-inner'>\
                 <div class='item-title'>\
-                  <div class='city' id="+song.id+">"+song.title+"\
+                  <div class='city' data-spotify=" + song.spotify_id + " id=" + song.id + ">"+song.title+"\
                   </div>\
                   <div class='country'>"+song.artist+"\
                   </div>\
