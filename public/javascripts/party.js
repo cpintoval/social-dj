@@ -184,8 +184,7 @@ myApp.buildWeatherHTML = function () {
     var $songToIncrement = $('#' + song.id);
     console.log($songToIncrement);
     if ($songToIncrement.text() === ""){
-      console.log("inside if statement");
-      $('#songs').append("VoteCount: <span>" + song.voteCount + "</span></li>");
+      console.log("Error, song not found");
     }else{
       $songToIncrement.parent().parent().find('#upvoted').text(song.voteCount);
       $songToIncrement.parent().parent().parent().parent().parent().attr('data-voteCount',song.voteCount);

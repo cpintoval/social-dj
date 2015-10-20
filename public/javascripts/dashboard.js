@@ -6,6 +6,7 @@ $(function() {
   $(document).on('click', 'td', function() {
     var spotify_id = $(this).attr('data');
     $('iframe').attr('src', url + spotify_id);
+    $(this).find('div.equalizer').toggleClass('hide');
   });
 
   socket.on('new songed', function(song) {
