@@ -28,6 +28,9 @@ $(function() {
                   <span>" + song.album + "</span>\
                 </div>\
                 <div class='large-2 columns'>\
+                  <div class='delete'>\
+                  <p><i class='fa fa-trash-o' id='delete'></i></p>\
+                  </div>\
                 </div>\
               </div>\
             </td>\
@@ -70,7 +73,7 @@ $(function() {
     }
   });
 
-  $('.delete').on("click","#delete",function(){
+  $('tbody').on("click","#delete",function(){
       socket.emit('delete song',{
         song: $(this).parent().parent().parent().parent().parent().attr('id'),
         party: $('th').attr('data')

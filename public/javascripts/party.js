@@ -165,7 +165,7 @@ myApp.buildWeatherHTML = function () {
                   <div class='country'>"+song.artist+"\
                   </div>\
                 </div>\
-                <div class='item-after'><span id='upvoted'>"+song.voteCount+"</span><i class='fa fa-thumbs-up' id='upvote' ></i></div>\
+                <div class='item-after'><span id='upvoted'>"+song.voteCount+"&nbsp;</span><i class='fa fa-thumbs-up' id='upvote' ></i></div>\
               </div>\
               </a>\
             </div>\
@@ -212,6 +212,10 @@ myApp.buildWeatherHTML = function () {
   //for error handing in the song input
   socket.on('error', function(){
     alert('The song name you entered is not valid!');
+  });
+ socket.on('deleted song',function(obj){
+  console.log('deleted song');
+  $('#' + obj.song).parent().parent().parent().parent().parent().remove();
   });
 
   function autocomplete(data){
