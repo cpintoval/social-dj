@@ -122,42 +122,54 @@ router.get('/:id/dj', function(request, response) {
 
     if (request.session.email) {
 
-      
+      models.dj.findOne({
+        where: {
+          email: request.session.email
+        }
+      }).then(function(dj) {
 
-      models.party.find(partyID).then(function(party) {
-        if (party) {
-          models.song.findAll({
+        if(dj) {
+          models.party.findOne({
             where: {
-              partyId: partyID
+              id: partyID,
+              djId: dj.id
             }
-          }).then(function(songs){
-            songs.sort(function(a, b) {
-              if(a.voteCount > b.voteCount) {
-                return -1;
-              }
-              else if(a.voteCount < b.voteCount) {
-                return 1;
-              }
-              else {
-                return 0;
-              }
-            });
-            response.render('dashboard', {
-              party: party,
-              songs: songs
-            });
+          }).then(function(party) {
+
+            if (party) {
+              models.song.findAll({
+                where: {
+                  partyId: partyID
+                }
+              }).then(function(songs){
+                songs.sort(function(a, b) {
+                  if(a.voteCount > b.voteCount) {
+                    return -1;
+                  }
+                  else if(a.voteCount < b.voteCount) {
+                    return 1;
+                  }
+                  else {
+                    return 0;
+                  }
+                });
+                response.render('dashboard', {
+                  party: party,
+                  songs: songs
+                });
+              });
+            }
+            else {
+              response.redirect('/parties/' + partyID);
+            }
           });
         }
         else {
-          response.render('error', {
-            message: 'This party does not exist',
-            error: {
-              status: '404',
-              stack: 'Stack level waaay too deep'
-            }
-          });
+          response.redirect('/parties/' + partyID);
         }
+
       });
+
     }
     else {
       response.redirect('/parties/' + partyID);
