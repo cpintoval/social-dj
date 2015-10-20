@@ -7,6 +7,10 @@ $(function() {
     var spotify_id = $(this).attr('data');
     $('iframe').attr('src', url + spotify_id);
     $(this).find('div.equalizer').toggleClass('hide');
+    socket.emit('now playing',{
+      playing: $(this).attr('id'),
+      partyId: $('th').attr('data')
+    });
   });
 
   socket.on('new songed', function(song) {

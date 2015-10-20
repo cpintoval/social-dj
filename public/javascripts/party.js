@@ -1,5 +1,4 @@
 $(function() {
-
   // Framework 7 Functionalities
 
   // Initialize app
@@ -133,6 +132,8 @@ myApp.buildWeatherHTML = function () {
 
 
 
+
+
   // $('form').on('keypress','#song',function(song){
   //   var $song_input =$('#song').val();
   //   if ($song_input.length > 4){
@@ -212,6 +213,17 @@ myApp.buildWeatherHTML = function () {
   socket.on('error', function(){
     alert('The song name you entered is not valid!');
   });
+
+  socket.on("now played",function(play){
+    var currentPartyId = $('#party-name').attr('data');
+    var partyId = play.partyId;
+    var songId = play.playing;
+    if (currentPartyId == partyId){
+      $('#'+songId).siblings(".country").append(" // Now Playing...");
+    }
+  });
+
+
  socket.on('deleted song',function(obj){
   console.log('deleted song');
   $('#' + obj.song).parent().parent().parent().parent().parent().remove();
@@ -251,6 +263,4 @@ setTimeout(function(){
   });
   $songsSortli.detach().appendTo($songsSort).fadeIn();
 },300);
-
-
 
