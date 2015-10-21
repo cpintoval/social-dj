@@ -17,7 +17,7 @@ $('#newparty-button').click(function(event){
   }
 });
 
-$('#archive').on('click',function(){
+$('.archive').on('click',function(){
 
   var $thatParty = $(this).parent();
 
