@@ -77,6 +77,22 @@
             </div>
 
           </div>
+<<<<<<< HEAD
+=======
+          <div id="past" class="small-12 large-6 columns">
+            <h3 class="header-dj">Party Archive</h3>
+            <div class="small-2 large-2 columns playlistparent">
+              <% for(var i = 0; i < parties.length; i++) { %>
+                <% if(parties[i].dataValues.active === false){ %>
+                <div id="party-item"><a href=<%= '/parties/' + parties[i].dataValues.id + '/dj' %>> <%= parties[i].dataValues.name %></a>&nbsp;<i class="fa fa-trash-o" data=<%=parties[i].dataValues.id%>></i>&nbsp;<a href=<%="/parties/playlist/"+parties[i].dataValues.id%>><i class="fa fa-th-list playlist" id="playlist" data=<%=parties[i].dataValues.id%>></i></a></div>
+                </br>
+                <% } %>
+              <% } %>
+
+            </div>
+          </div>
+        </div>
+>>>>>>> master
 
         </div>
 

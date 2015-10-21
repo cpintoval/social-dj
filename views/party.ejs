@@ -45,7 +45,7 @@
                     <a href="#" data-woeid="{{woeid}}" class="item-content item-link">
                       <div class="item-inner">
                         <div class="item-title">
-                          <div class="city" id=<%= songs[i].id %> > <%=songs[i].title%></div>
+                          <div class="city" data-spotify=<%=songs[i].spotify_id%> id=<%= songs[i].id %> > <%=songs[i].title%></div>
                           <div class="country"><%= songs[i].artist %></div>
                         </div>
                         <div class="item-after"><span id="upvoted"> <%=songs[i].voteCount%></span>&nbsp;<i class="fa fa-thumbs-up" id="upvote" ></i></div>

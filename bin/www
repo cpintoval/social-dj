@@ -8,7 +8,6 @@ var app = require('../app');
 var debug = require('debug')('social-dj:server');
 var http = require('http');
 var models = require("../models");
-
 /**
  * Get port from environment and store in Express.
  */
@@ -27,57 +26,11 @@ var io = require('socket.io')(server);
  * Listen on provided port, on all network interfaces.
  */
 
+ // socket listern modules
+ var listners = require('../bin/socket_listeners.js');
+
+
 models.sequelize.sync().then(function () {
-
-
-
-  // models.song.destroy({where:{}});
-  // models.party.destroy({where:{}});
-  // models.dj.destroy({where:{}});
-  // // Seed
-  // models.dj.create({
-  //   name: "Tony",
-  //   password: "fakepassword",
-  //   email: "dj@email.com"
-  // }).then(function(user) {
-  //   models.party.create({
-  //     name: "The Party",
-  //     active: true,
-  //     djId: user.id
-  //   }).then(function(party) {
-
-  //     models.song.create({
-  //       title: "Song 1",
-  //       album: "Dummy Album",
-  //       artist: "Dummy Artist",
-  //       voteCount: 1,
-  //       img_url: "https://upload.wikimedia.org/wikipedia/en/6/6b/Portishead_-_Dummy.png",
-  //       spotify_id: "abc",
-  //       partyId: party.id
-  //     });
-
-  //     models.song.create({
-  //       title: "Dummy Song",
-  //       album: "Dummy Album 2",
-  //       artist: "Dummy Artist",
-  //       voteCount: 1,
-  //       img_url: "https://upload.wikimedia.org/wikipedia/en/6/6b/Portishead_-_Dummy.png",
-  //       spotify_id: "abc",
-  //       partyId: party.id
-  //     });
-
-  //     models.song.create({
-  //       title: "Back to Back",
-  //       album: "Back to Back",
-  //       artist: "Drake",
-  //       voteCount: 1,
-  //       img_url: "https://theauthoritydjs.files.wordpress.com/2015/08/drake_back_2_back-front.jpg",
-  //       spotify_id: "spotify:track:5lFDtgWsjRJu8fPOAyJIAK",
-  //       partyId: party.id
-  //     });
-
-  //   });
-  // });
 
   server.listen(port, function() {
     console.log('Server listening on port ' + port + '...');
@@ -104,6 +57,12 @@ models.sequelize.sync().then(function () {
         }).then(function(response) {
           console.log(response,"logging the response of the data query!", obj.song.id);
           if (response.length === 0) {
+            models.song_archive.create({
+              song_id: obj.song.id,
+              song_name: obj.song.name,
+              party_id: obj.partyId,
+              voteCount: 0
+            });
             models.song.create({
               title: obj.song.name,
               album: obj.song.album,
@@ -146,7 +105,7 @@ models.sequelize.sync().then(function () {
         }
       }).then(function(response){
         if (response.length === 0){
-          console.log(obj.party,obj.song);
+          console.log(obj.party,obj.song,obj.spotifyId,"==============");
           models.vote.create({
             partyId: obj.party,
             songId: obj.song,
@@ -158,13 +117,26 @@ models.sequelize.sync().then(function () {
             partyId: obj.party
             }
           }).then(function(response){
-            var song = response[0];
-            if (song) {
-              song.increment('voteCount').then(function(res){
-              io.emit('new voted', res);
-            }
-            });
+              var song = response[0];
+
+              if (song) {
+                models.song_archive.findAll({
+                  where: {
+                  song_id: obj.spotifyId,
+                  party_id: obj.party
+                }
+                }).then(function(data){
+                  var arc_song = data[0];
+                  arc_song.increment('voteCount');
+                });
+
+                song.increment('voteCount').then(function(res){
+                io.emit('new voted',res);
+                });
+
+              }
           });
+
         } else{
           console.log("already voted!");
         }
