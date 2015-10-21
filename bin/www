@@ -51,8 +51,7 @@ models.sequelize.sync().then(function () {
         models.song.findAll({
           where: {
             spotify_id: obj.song.id,
-            partyId: obj.partyId,
-            cookie: obj.cookie
+            partyId: obj.partyId
           }
         }).then(function(response) {
           console.log(response,"logging the response of the data query!", obj.song.id);
@@ -80,7 +79,7 @@ models.sequelize.sync().then(function () {
             console.log(response[0].cookie,"the response cookie");
             var song = response[0];
 
-            if (response[0].cookie === 0){
+            if (response[0].cookie != obj.cookie){
               song.increment('voteCount').then(function(resp) {
                 io.emit('new songed', song);
               });
