@@ -43,8 +43,7 @@ $('#active').on('click', '.archive', function(){
 $('#past-list').on('click', '.remove', function(){
 
   var $thisParty = $(this).parent();
-
-  $.post('/parties/remove',{partyid: $(this).attr("data")},function(response){
+  $.post('/parties/remove',{partyid: $(this).attr('data')},function(response){
     if (response === "removed"){
       $thisParty.remove();
     }

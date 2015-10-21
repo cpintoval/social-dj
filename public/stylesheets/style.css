@@ -163,7 +163,7 @@ body {
   color: white;
   border-bottom: 1px solid white;
   line-height: 50px;
-  background: none;
+  background: none !important;
 }
 
 .party-item-archive > a, .party-item-archive > .fa {
