@@ -32,12 +32,10 @@ $('#signup-button').click(function(event){
 
 $('#partysearch-button').click(function(event){
   event.preventDefault();
-  console.log("THERE");
-  var goToPartyName = $('#party-input').val();
-  console.log("HERE");
-  console.log(goToPartyName);
+  var goToPartyCode = $('#party-input').val();
+  console.log(goToPartyCode);
 
-  $.post('/goto', {partyName: goToPartyName}, function(response){
+  $.post('/goto', {partyCode: goToPartyCode}, function(response){
 
     window.location.href="/parties/" + response.id;
   });
@@ -45,12 +43,10 @@ $('#partysearch-button').click(function(event){
 
 $('#bigpartysearch-button').click(function(event){
   event.preventDefault();
-  console.log("THERE");
-  var goToPartyName = $('#bigparty-input').val();
-  console.log("HERE");
-  console.log(goToPartyName);
+  var goToPartyCode = $('#bigparty-input').val();
+  console.log(goToPartyCode);
 
-  $.post('/goto', {partyName: goToPartyName}, function(response){
+  $.post('/goto', {partyCode: goToPartyCode}, function(response){
 
     window.location.href="/parties/" + response.id;
   });

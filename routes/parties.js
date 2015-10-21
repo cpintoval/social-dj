@@ -132,40 +132,62 @@ router.get('/:id/dj', function(request, response) {
 
     var partyID = request.params.id;
 
-    models.party.find(partyID).then(function(party) {
-      if (party) {
-        models.song.findAll({
-          where: {
-            partyId: partyID
-          }
-        }).then(function(songs){
-          songs.sort(function(a, b) {
-            if(a.voteCount > b.voteCount) {
-              return -1;
+    if (request.session.email) {
+
+      models.dj.findOne({
+        where: {
+          email: request.session.email
+        }
+      }).then(function(dj) {
+
+        if(dj) {
+          models.party.findOne({
+            where: {
+              id: partyID,
+              djId: dj.id
             }
-            else if(a.voteCount < b.voteCount) {
-              return 1;
+          }).then(function(party) {
+
+            if (party) {
+              models.song.findAll({
+                where: {
+                  partyId: partyID
+                }
+              }).then(function(songs){
+                songs.sort(function(a, b) {
+                  if(a.voteCount > b.voteCount) {
+                    return -1;
+                  }
+                  else if(a.voteCount < b.voteCount) {
+                    return 1;
+                  }
+                  else {
+                    return 0;
+                  }
+                });
+                response.render('dashboard', {
+                  party: party,
+                  songs: songs
+                });
+              });
             }
             else {
-              return 0;
+              response.redirect('/parties/' + partyID);
             }
           });
-          response.render('dashboard', {
-            party: party,
-            songs: songs
-          });
-        });
-      }
-      else {
-        response.render('error', {
-          message: 'This party does not exist',
-          error: {
-            status: '404',
-            stack: 'Stack level waaay too deep'
-          }
-        });
-      }
-    });
+        }
+        else {
+          response.redirect('/parties/' + partyID);
+        }
+
+      });
+
+    }
+    else {
+      response.redirect('/parties/' + partyID);
+    }
+
+    
 
 });
 
