@@ -68,18 +68,32 @@ router.post('/archive',function(request,response){
     }).then(function(party){
 
     response.send(party);
-    })
+    });
   });
 });
 
 router.post('/remove',function(request,response){
   var partyId = request.body.partyid;
-  models.party.destroy({
+  models.vote.destroy({
     where: {
-      id: partyId
+      partyId: partyId
     }
   }).then(function(data){
+    models.song.destroy({
+      where: {
+        partyId: partyId
+      }
+    });
+  }).then(function(){
+    models.party.destroy({
+      where: {
+        id: partyId
+      }
+    });
+  }).then(function(){
     response.send("removed");
+  }).catch(function(e){
+    console.log(e,partyId,"remove route");
   });
 });
 
@@ -187,7 +201,7 @@ router.get('/:id/dj', function(request, response) {
       response.redirect('/parties/' + partyID);
     }
 
-    
+
 
 });
 
