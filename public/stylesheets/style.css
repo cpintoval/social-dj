@@ -154,9 +154,39 @@ body {
 .party-item > a, .party-item > .fa {
   color: white;
   position: relative;
+  font-size: 25px;
 }
 
-#active, #active-list {
+.party-item-archive {
+  height: 50px;
+  width: 100%;
+  color: white;
+  border-bottom: 1px solid white;
+  line-height: 50px;
+}
+
+.party-item-archive > a, .party-item-archive > .fa {
+  color: white;
+  position: relative;
+  font-size: 20px;
+}
+
+#party-number {
+  text-align: center;
+  margin: 0 auto;
+}
+
+.circle {
+  border-radius: 100%;
+  border: 2px solid white;
+  color: white;
+  height: 120px;
+  width: 120px;
+  text-align: center;
+  margin: 0 auto;
+}
+
+#active, #active-list, #past, #past-list {
   text-align: center;
 }
 
