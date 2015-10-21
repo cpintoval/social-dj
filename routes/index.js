@@ -62,6 +62,8 @@ router.post('/', function(request,response) {
     } else {
       response.send({message: 'A dj account with the email you provided does not exist!'});
     }
+  }).catch(function(e) {
+    console.log(e, "login");
   });
 });
 
@@ -89,6 +91,8 @@ router.post('/signup', function(request,response){
         email: request.body.email
       }).then(response.end('done'));
     }
+  }).catch(function(e){
+    console.log(e, "signup");
   });
 });
 

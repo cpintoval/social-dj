@@ -73,6 +73,8 @@ models.sequelize.sync().then(function () {
               cookie: obj.cookie
             }).then(function(song) {
               io.emit('new songed', song);
+            }).catch(function(e) {
+              console.log(e, "new song event");
             });
           }
           else {
@@ -134,11 +136,15 @@ models.sequelize.sync().then(function () {
                 });
 
               }
+          }).catch(function(e){
+            console.log(e, "archive boom");
           });
 
         } else{
           console.log("already voted!");
         }
+      }).catch(function(e) {
+        console.log(e, "new vote event error");
       });
     });
 
@@ -164,6 +170,8 @@ models.sequelize.sync().then(function () {
           console.log("sending deleted socket");
           io.emit('deleted song',obj);
         });
+      }).catch(function(e){
+        console.log(e, "delete song error");
       });
     });
   });
