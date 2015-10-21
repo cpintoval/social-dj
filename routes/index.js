@@ -33,7 +33,9 @@ router.post('/goto', function(request, response){
       id: request.body.partyCode
     }
   }).then(function(goToParty){
-    response.send(goToParty);
+    if (goToParty.active){
+      response.send(goToParty);
+    }
   });
 });
 
