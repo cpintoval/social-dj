@@ -19,7 +19,7 @@ $('#newparty-button').click(function(event){
 
 $('#active').on('click', '.archive', function(){
 
-  var $thatParty = $(this).parent();
+  var $thatParty = $(this).parent().parent();
 
   $.post('/parties/archive',{partyid: $(this).attr("data")},function(response){
 
@@ -35,7 +35,7 @@ $('#active').on('click', '.archive', function(){
 
     if (response){
       $thatParty.remove();
-      $('#past').append($newListItem);
+      $('.playlistparent').append($newListItem);
     }
   });
 });
