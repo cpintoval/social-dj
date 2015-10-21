@@ -99,6 +99,7 @@ router.post('/remove',function(request,response){
 
 router.get('/playlist/:id',function(request,response){
   var partyId = request.params.id;
+  console.log(partyId,"====/playlist/:id=====");
   models.song_archive.findAll({
     where:{
       party_id: partyId
