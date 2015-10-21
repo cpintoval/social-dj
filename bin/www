@@ -159,8 +159,10 @@ models.sequelize.sync().then(function () {
             }
           }).then(function(response){
             var song = response[0];
-            song.increment('voteCount').then(function(res){
-            io.emit('new voted',res);
+            if (song) {
+              song.increment('voteCount').then(function(res){
+              io.emit('new voted', res);
+            }
             });
           });
         } else{
@@ -170,7 +172,7 @@ models.sequelize.sync().then(function () {
     });
 
     socket.on('now playing',function(playing){
-      io.emit('now played',playing);
+      io.emit('now played', playing);
     });
 
     socket.on('delete song',function(obj){

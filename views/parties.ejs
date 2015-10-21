@@ -35,67 +35,58 @@
           </section>
         </nav>
 
-        <div class="row">
-          <div id="profile" class="small-12 large-4 columns">
-            <img id="profile-picture" src="/images/dj-profile.png"><h1 class="header"><%= email %></h1>
+        <div id="party-index" class="row">
+
+          <div id="profile" class="large-2 columns">
+            <div id="profile-banner">
+              <img id="profile-picture" src="/images/dj-profile.png">
+              <h2 class="header"><%= email %></h2>
+            </div>
           </div>
 
-        </div>
-
-        <div class="row">
-          <div id="active" class="small-12 large-6 columns">
-            <h3 class="header-dj">Active Parties</h3>
+          <div id="party-cols" class="large-10 columns">
+            
             <div class="row">
-              <div class="small-2 large-2 columns">
-                <% for(var i = 0; i < parties.length; i++) { %>
-                  <% if(parties[i].dataValues.active === true){ %>
-                  <div id="party-item"><a href=<%= '/parties/' + parties[i].dataValues.id + '/dj' %>><%= parties[i].dataValues.name %></a><i class="fa fa-archive" id="archive" data=<%=parties[i].dataValues.id%>></i></div>
-                  </br>
+              <div id="active" class="large-12 columns">
+                <h3 class="header-dj">Active Parties</h3>
+                <div id="active-list" class="row">
+                  <div class="large-12 columns">
+                    <% for(var i = 0; i < parties.length; i++) { %>
+                      <% if(parties[i].dataValues.active === true){ %>
+                      <div class="party-item">
+
+                        <a href=<%= '/parties/' + parties[i].dataValues.id + '/dj' %>><%= parties[i].dataValues.name %></a><i class="fa fa-archive" id="archive" data=<%=parties[i].dataValues.id%>></i>
+
+                      </div>
+                      <% } %>
+                    <% } %>
+                  </div>
+                </div>
+              </div>
+              <div id="past" class="large-12 columns">
+                <h3 class="header-dj">Party Archive</h3>
+                <div class="small-2 large-2 columns">
+                  <% for(var i = 0; i < parties.length; i++) { %>
+                    <% if(parties[i].dataValues.active === false){ %>
+                    <div id="party-item"><a href=<%= '/parties/' + parties[i].dataValues.id + '/dj' %>><%= parties[i].dataValues.name %></a><i class="fa fa-trash-o" id="remove" data=<%=parties[i].dataValues.id%>></i></div>
+                    </br>
+                    <% } %>
                   <% } %>
-                <% } %>
+                </div>
               </div>
             </div>
+
           </div>
-          <div id="past" class="small-12 large-6 columns">
-            <h3 class="header-dj">Party Archive</h3>
-            <div class="small-2 large-2 columns">
-              <% for(var i = 0; i < parties.length; i++) { %>
-                <% if(parties[i].dataValues.active === false){ %>
-                <div id="party-item"><a href=<%= '/parties/' + parties[i].dataValues.id + '/dj' %>><%= parties[i].dataValues.name %></a><i class="fa fa-trash-o" id="remove" data=<%=parties[i].dataValues.id%>></i></div>
-                </br>
-                <% } %>
-              <% } %>
-            </div>
-          </div>
+
         </div>
 
-        <div id="hostPartyModal" class="reveal-modal" data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
-          <h2 id="modalTitle">Host a new party</h2>
-          <form id="newparty-form">
-            <input type="text" size="30" placeholder="Type your new party name here" id="new-party"><br/>
-            <input type="button" id="newparty-button" value="Create Party"></input>
-          </form>
-        </div>
-
-    <!-- <h1>Party List</h1>
-    <ul class='newparties'>
-      <% for(var i = 0; i < parties.length; i++) { %>
-        <% if(parties[i].dataValues.active === true){ %>
-        <li><a href=<%= '/parties/' + parties[i].dataValues.id %>><%= parties[i].dataValues.name %></a><i class="fa fa-archive" id="archive" data=<%=parties[i].dataValues.id%>></i></li>
-        <% } %>
-      <% } %>
-
-    </ul>
-
-    <h2>Old Party List</h2>
-    <ul class='oldparties'>
-      <% for(var i = 0; i < parties.length; i++) { %>
-        <% if(parties[i].dataValues.active === false){ %>
-        <li><a href=<%= '/parties/' + parties[i].dataValues.id %>><%= parties[i].dataValues.name %></a><i class="fa fa-trash-o" id="remove" data=<%=parties[i].dataValues.id%>></i></li>
-        <% } %>
-      <% } %>
-
-    </ul> -->
+      <div id="hostPartyModal" class="reveal-modal" data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
+        <h2 id="modalTitle">Host a new party</h2>
+        <form id="newparty-form">
+          <input type="text" size="30" placeholder="Type your new party name here" id="new-party"><br/>
+          <input type="button" id="newparty-button" value="Create Party"></input>
+        </form>
+      </div>
 
     <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
     <script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>

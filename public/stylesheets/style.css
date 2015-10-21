@@ -98,30 +98,66 @@ body {
   padding-left: 20px;
 }
 
-#profile {
+#party-index {
+  height: 100%;
   width: 100%;
+}
+
+#profile {
   text-align: center;
+  height: 100%;
+  width: 40%;
   padding: 2%;
+  border-radius: 2px;
+  border-right: 2px solid rgba(0, 0, 0, 0.2);
 }
 
 #profile-picture {
   height: 120px;
   width: 120px;
+  border-radius: 50%;
+  border: 2px solid rgba(0, 0, 0, 0.2);
 }
 
-#party-item {
-  height: 40px;
-  width: 120px;
-  background: #ff6600;
+#profile-banner {
+  background: url('https://s-media-cache-ak0.pinimg.com/736x/da/dd/1c/dadd1c8c072645fa2537676024b9ea9c.jpg') no-repeat center;
+  border-radius: 2px;
+}
+
+#party-cols {
+  height: 100%;
+  width: 60%;
+}
+
+.party-item {
+  height: 100px;
+  width: 400px;
+  background: url('https://0.s3.envato.com/files/63641886/fire_14_PREVIEW.jpg') no-repeat center;
   color: white;
   text-align: center;
-  border-radius: 20px;
-  padding: 5px;
-  box-shadow: 3px 3px 3px #888888;
+  border-radius: 2px;
+  margin: 10px auto;
+  line-height: 100px;
+  position: relative;
 }
 
-#party-item > a {
+.party-item::before {
+  content: "";
+  display: block;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  opacity: 0.5;
+  background-color: black;
+}
+
+.party-item > a, .party-item > .fa {
   color: white;
+  position: relative;
+}
+
+#active, #active-list {
+  text-align: center;
 }
 
 #dashboard {
