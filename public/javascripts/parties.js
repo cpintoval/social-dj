@@ -28,8 +28,8 @@ $('#active').on('click', '.archive', function(){
     var $newListItem = $thatParty.empty().append('<div class="party-item-archive">\
       <a href="/parties/' + response.id + '">' + response.name + '</a>\
         <i class="fa fa-trash-o remove" data="' + response.id + '"></i>\
-      <a href="/parties/playlist/"' + response.id + '>\
-        <i class="fa fa-th-list playlist" data=' + response.id + '></i>\
+      <a href="/parties/playlist/' + response.id + '">\
+        <i class="fa fa-th-list playlist" data=' + response.id + '"></i>\
       </a>\
       </div>');
 
@@ -40,7 +40,7 @@ $('#active').on('click', '.archive', function(){
   });
 });
 
-$('#past-list').on('click', '.remove', function(){
+$('.party-item-archive').on('click', '.remove', function(){
 
   var $thisParty = $(this).parent();
   $.post('/parties/remove',{partyid: $(this).attr('data')},function(response){
@@ -48,9 +48,4 @@ $('#past-list').on('click', '.remove', function(){
       $thisParty.remove();
     }
   });
-});
-
-$('.playlistparent').on('click','.playlist',function(){
-  console.log($(this).attr('data'));
-  $.get('/parties/playlist/'+$(this).attr("data"));
 });
