@@ -83,6 +83,21 @@ router.post('/remove',function(request,response){
   });
 });
 
+router.get('/playlist/:id',function(request,response){
+  var partyId = request.params.id;
+  models.song_archive.findAll({
+    where:{
+      party_id: partyId
+    }
+  }).then(function(data){
+    console.log(request.params.id,"=========");
+    response.render('playlist',{
+      songs: data
+    });
+  });
+
+});
+
 router.get('/:id', function(request, response) {
 
     var partyID = request.params.id;
@@ -111,7 +126,6 @@ router.get('/:id', function(request, response) {
         });
       }
     });
-
 });
 
 router.get('/:id/dj', function(request, response) {

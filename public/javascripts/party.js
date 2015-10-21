@@ -246,7 +246,6 @@ myApp.buildWeatherHTML = function () {
       }
     }
   }
-
 });
 setTimeout(function(){
   var $songsSort = $('ul.songs-list');

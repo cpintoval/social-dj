@@ -15,7 +15,7 @@ $('#newparty-button').click(function(event){
   } else {
     alert('Party name cannot be empty!');
   }
-})
+});
 
 $('#archive').on('click',function(){
 
@@ -23,7 +23,7 @@ $('#archive').on('click',function(){
 
   $.post('/parties/archive',{partyid: $(this).attr("data")},function(response){
 
-    console.log(response);
+    console.log(response,"/parties/archive response");
 
     var $newListItem = $thatParty.empty().append('<div id="party-item"><a href="/parties/' + response.id + '">' + response.name + '</a><i class="fa fa-trash-o" id="remove" data="' + response.id + '"></i></div>');
 
@@ -43,4 +43,9 @@ $('#remove').on('click',function(){
       $thisParty.remove();
     }
   });
+});
+
+$('.playlistparent').on('click','.playlist',function(){
+  console.log($(this).attr('data'));
+  $.get('/parties/playlist/'+$(this).attr("data"));
 });
