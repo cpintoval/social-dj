@@ -118,18 +118,23 @@ models.sequelize.sync().then(function () {
             }
           }).then(function(response){
               var song = response[0];
-              models.song_archive.findAll({
-                where: {
-                song_id: obj.spotifyId,
-                party_id: obj.party
+
+              if (song) {
+                models.song_archive.findAll({
+                  where: {
+                  song_id: obj.spotifyId,
+                  party_id: obj.party
+                }
+                }).then(function(data){
+                  var arc_song = data[0];
+                  arc_song.increment('voteCount');
+                });
+
+                song.increment('voteCount').then(function(res){
+                io.emit('new voted',res);
+                });
+
               }
-            }).then(function(data){
-              var arc_song = data[0];
-              arc_song.increment('voteCount');
-            });
-            song.increment('voteCount').then(function(res){
-            io.emit('new voted',res);
-            });
           });
 
         } else{
