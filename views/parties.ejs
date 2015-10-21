@@ -75,7 +75,7 @@
                   <div class="large-12 columns playlistparent">
                     <% for(var i = 0; i < parties.length; i++) { %>
                       <% if(parties[i].dataValues.active === false){ %>
-                      <div class="party-item-archive"><a href=<%= '/parties/' + parties[i].dataValues.id + '/dj' %>> <%= parties[i].dataValues.name %></a>&nbsp;<i class="fa fa-trash-o" data=<%=parties[i].dataValues.id%>></i>&nbsp;<a href=<%="/parties/playlist/"+parties[i].dataValues.id%>><i class="fa fa-th-list playlist" id="playlist" data=<%=parties[i].dataValues.id%>></i></a></div>
+                      <div class="party-item-archive"><a href=<%= '/parties/' + parties[i].dataValues.id + '/dj' %>> <%= parties[i].dataValues.name %></a>&nbsp;<i class="fa fa-trash-o remove" data=<%=parties[i].dataValues.id%>></i>&nbsp;<a href=<%="/parties/playlist/"+parties[i].dataValues.id%>><i class="fa fa-th-list playlist" data=<%=parties[i].dataValues.id%>></i></a></div>
                       <% } %>
                     <% } %>
                   </div>

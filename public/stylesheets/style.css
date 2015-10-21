@@ -138,10 +138,10 @@ body {
   border-radius: 2px;
   margin: 10px auto;
   line-height: 100px;
-  position: relative;
+  /*position: relative;*/
 }
 
-.party-item::before {
+/*.party-item::before {
   content: "";
   display: block;
   width: 100%;
@@ -149,7 +149,7 @@ body {
   position: absolute;
   opacity: 0.5;
   background-color: black;
-}
+}*/
 
 .party-item > a, .party-item > .fa {
   color: white;
@@ -163,6 +163,7 @@ body {
   color: white;
   border-bottom: 1px solid white;
   line-height: 50px;
+  background: none;
 }
 
 .party-item-archive > a, .party-item-archive > .fa {

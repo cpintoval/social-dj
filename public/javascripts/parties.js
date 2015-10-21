@@ -17,7 +17,7 @@ $('#newparty-button').click(function(event){
   }
 });
 
-$('.archive').on('click',function(){
+$('#active').on('click', '.archive', function(){
 
   var $thatParty = $(this).parent();
 
@@ -25,7 +25,13 @@ $('.archive').on('click',function(){
 
     console.log(response,"/parties/archive response");
 
-    var $newListItem = $thatParty.empty().append('<div id="party-item"><a href="/parties/' + response.id + '">' + response.name + '</a><i class="fa fa-trash-o" id="remove" data="' + response.id + '"></i></div>');
+    var $newListItem = $thatParty.empty().append('<div class="party-item-archive">\
+      <a href="/parties/' + response.id + '">' + response.name + '</a>\
+        <i class="fa fa-trash-o remove" data="' + response.id + '"></i>\
+      <a href="/parties/playlist/"' + response.id + '>\
+        <i class="fa fa-th-list playlist" data=' + response.id + '></i>\
+      </a>\
+      </div>');
 
     if (response){
       $thatParty.remove();
@@ -34,7 +40,7 @@ $('.archive').on('click',function(){
   });
 });
 
-$('#remove').on('click',function(){
+$('#past-list').on('click', '.remove', function(){
 
   var $thisParty = $(this).parent();
 
