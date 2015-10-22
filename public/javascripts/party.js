@@ -132,10 +132,6 @@ myApp.buildWeatherHTML = function () {
     });
   });
 
-
-
-
-
   // $('form').on('keypress','#song',function(song){
   //   var $song_input =$('#song').val();
   //   if ($song_input.length > 4){
@@ -220,7 +216,9 @@ myApp.buildWeatherHTML = function () {
     var partyId = play.partyId;
     var songId = play.playing;
     if (currentPartyId == partyId){
-      $('#'+songId).siblings(".country").append(" // Now Playing...");
+      $('#'+songId).parent().parent().parent().css("background","#95A5A6");
+      $('#'+songId).siblings('.country').append("...Now Playing...");
+
     }
   });
 
