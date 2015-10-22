@@ -274,12 +274,11 @@ if ($('ul li').length === 0){
             <div >\
             </div>\
           </div>\
-          <div class='item-after'><span id='upvoted'>Click '+' above</span>&nbsp;<i class='fa fa-level-up'></i></div>\
+          <div class='item-after'><span id='upvoted'><font size='6'>Click '+' above</font></span>&nbsp;<i class='fa fa-level-up'></i></div>\
         </div>\
         </a>\
       </div>\
     </li>\
   ");
 }
-console.log($('ul li'));
 
