@@ -65,6 +65,7 @@ myApp.buildWeatherHTML = function () {
   $('.popup').on('open', function () {
       $('.views').addClass('blured');
       $('.statusbar-overlay').addClass('with-popup-opened');
+      $('.swipeouted').remove();
   });
   $('.popup').on('opened', function () {
       $('.popup input[type="text"]')[0].focus();
@@ -262,4 +263,22 @@ setTimeout(function(){
   });
   $songsSortli.detach().appendTo($songsSort).fadeIn();
 },300);
+if ($('ul li').length === 0){
+  $('ul.songs-list').append("\
+    <li class='swipeouted' data-voteCount=0>\
+      <div class='swipeout-content'><a class='item-content item-link'>\
+        <div class='item-inner'>\
+          <div class='item-title'>\
+            <div  >\
+            </div>\
+            <div >\
+            </div>\
+          </div>\
+          <div class='item-after'><span id='upvoted'><font size='6'>Click '+' above</font></span>&nbsp;<i class='fa fa-level-up'></i></div>\
+        </div>\
+        </a>\
+      </div>\
+    </li>\
+  ");
+}
 
