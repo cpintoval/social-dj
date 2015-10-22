@@ -71,7 +71,22 @@ $(function() {
     else {
       $songToIncrement.find('.vote-count').text(song.voteCount);
       $songToIncrement.parent().attr('data-votes', song.voteCount);
-      setTimeout(function() {
+    }
+  });
+
+  $('tbody').on("click","#delete",function(){
+      socket.emit('delete song',{
+        song: $(this).parent().parent().parent().parent().parent().attr('id'),
+        party: $('th').attr('data')
+    });
+  });
+
+  socket.on('deleted song',function(obj){
+    console.log('deleted song');
+    $('#' + obj.song).parent().remove();
+  });
+
+  setInterval(function() {
         var $songsTable = $('tbody');
         var $songsArray = $songsTable.children('tr');
         $songsArray.sort(function(a, b) {
@@ -88,21 +103,6 @@ $(function() {
           }
         });
         $songsArray.detach().appendTo($songsTable).fadeIn();
-      }, 1000);
-    }
-  });
-
-  $('tbody').on("click","#delete",function(){
-      socket.emit('delete song',{
-        song: $(this).parent().parent().parent().parent().parent().attr('id'),
-        party: $('th').attr('data')
-    });
-  });
-
-  socket.on('deleted song',function(obj){
-    console.log('deleted song');
-    $('#' + obj.song).parent().remove();
-  });
-
+      }, 3000);
 
 });
