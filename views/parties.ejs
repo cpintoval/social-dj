@@ -57,15 +57,28 @@
                 <h3 class="header-dj">Active Parties</h3>
                 <div id="active-list" class="row">
                   <div class="large-12 columns">
-                    <% for(var i = 0; i < parties.length; i++) { %>
-                      <% if(parties[i].dataValues.active === true){ %>
-                      <div class="party-item">
+                    <% if(parties.length > 0) { %>
+                      <% var active = 0; %>
+                      <% for(var i = 0; i < parties.length; i++) { %>
+                        <% if(parties[i].dataValues.active === true){ %>
+                          <% active += 1; %>
+                        <div class="party-item">
 
-                        <a href=<%= '/parties/' + parties[i].dataValues.id + '/dj' %>><%= parties[i].dataValues.name %></a><i class="fa fa-archive archive" data=<%=parties[i].dataValues.id%>></i>
-
-                      </div>
+                          <a href=<%= '/parties/' + parties[i].dataValues.id + '/dj' %>><%= parties[i].dataValues.name %></a><i class="fa fa-archive archive" data=<%=parties[i].dataValues.id%>></i>
+                        </div>
+                        <% } %>
                       <% } %>
+                      <% if(active === 0) { %>
+                        <div class="no-parties">
+                          <p>No active parties, host one!</p>
+                        </div>
+                      <% } %>
+                    <% } else { %>
+                      <div class="no-parties">
+                        <p>No parties, host one!</p>
+                      </div>
                     <% } %>
+
                   </div>
                 </div>
               </div>
