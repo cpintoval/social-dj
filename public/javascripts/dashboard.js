@@ -87,22 +87,22 @@ $(function() {
   });
 
   setInterval(function() {
-        var $songsTable = $('tbody');
-        var $songsArray = $songsTable.children('tr');
-        $songsArray.sort(function(a, b) {
-          var votesA = a.getAttribute('data-votes');
-          var votesB = b.getAttribute('data-votes');
-          if (votesA > votesB) {
-            return -1;
-          }
-          else if (votesA < votesB) {
-            return 1;
-          }
-          else {
-            return 0;
-          }
-        });
-        $songsArray.detach().appendTo($songsTable).fadeIn();
-      }, 3000);
+    var $songsTable = $('tbody');
+    var $songsArray = $songsTable.children('tr');
+    $songsArray.sort(function(a, b) {
+      var votesA = a.getAttribute('data-votes');
+      var votesB = b.getAttribute('data-votes');
+      if (votesA > votesB) {
+        return -1;
+      }
+      else if (votesA < votesB) {
+        return 1;
+      }
+      else {
+        return 0;
+      }
+    });
+    $songsArray.detach().appendTo($songsTable).fadeIn();
+  }, 3000);
 
 });
