@@ -59,6 +59,24 @@ $(function() {
       else {
         $songOption.find('.vote-count').text(song.voteCount);
         $songOption.parent().attr('data-votes', song.voteCount);
+        setTimeout(function() {
+          var $songsTable = $('tbody');
+          var $songsArray = $songsTable.children('tr');
+          $songsArray.sort(function(a, b) {
+            var votesA = a.getAttribute('data-votes');
+            var votesB = b.getAttribute('data-votes');
+            if (votesA > votesB) {
+              return -1;
+            }
+            else if (votesA < votesB) {
+              return 1;
+            }
+            else {
+              return 0;
+            }
+          });
+          $songsArray.detach().appendTo($songsTable).fadeIn();
+        }, 1000);
       }
     }
   });
@@ -66,11 +84,29 @@ $(function() {
   socket.on('new voted', function(song) {
     var $songToIncrement = $('#' + song.id);
     if ($songToIncrement.text() === "") {
-
+      console.log("Song selection error.");
     }
     else {
       $songToIncrement.find('.vote-count').text(song.voteCount);
       $songToIncrement.parent().attr('data-votes', song.voteCount);
+      setTimeout(function() {
+          var $songsTable = $('tbody');
+          var $songsArray = $songsTable.children('tr');
+          $songsArray.sort(function(a, b) {
+            var votesA = a.getAttribute('data-votes');
+            var votesB = b.getAttribute('data-votes');
+            if (votesA > votesB) {
+              return -1;
+            }
+            else if (votesA < votesB) {
+              return 1;
+            }
+            else {
+              return 0;
+            }
+          });
+          $songsArray.detach().appendTo($songsTable).fadeIn();
+        }, 1000);
     }
   });
 
@@ -85,24 +121,5 @@ $(function() {
     console.log('deleted song');
     $('#' + obj.song).parent().remove();
   });
-
-  setInterval(function() {
-    var $songsTable = $('tbody');
-    var $songsArray = $songsTable.children('tr');
-    $songsArray.sort(function(a, b) {
-      var votesA = a.getAttribute('data-votes');
-      var votesB = b.getAttribute('data-votes');
-      if (votesA > votesB) {
-        return -1;
-      }
-      else if (votesA < votesB) {
-        return 1;
-      }
-      else {
-        return 0;
-      }
-    });
-    $songsArray.detach().appendTo($songsTable).fadeIn();
-  }, 3000);
 
 });
